@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z世代向けスマート観光支援アプリ企画 - 新潟観光ナビ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            /* 超絶自然版 背景魔法！ */
+            background: linear-gradient(-45deg, #e0f2fe, #f0fdf4, #fefce8, #dcfce7, #e0f2fe);
+            background-size: 400% 400%;
+            animation: gradient-background 25s ease infinite;
+        }
+        @keyframes gradient-background {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-flow 8s ease-in-out infinite;
+        }
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .section {
+            scroll-margin-top: 70px;
+        }
+        .reveal {
+            visibility: hidden;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .accordion-button.active + .accordion-content {
+            max-height: 1000px;
+        }
+        .accordion-button .icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .accordion-button.active .icon {
+            transform: rotate(180deg);
+        }
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1620021392953-299e39954101?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .particles-bg {
+            position: relative;
+            background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+            overflow: hidden;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        .content-over-particles {
+            position: relative;
+            z-index: 1;
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .section-bg, .card-bg {
+             background-color: rgba(255, 255, 255, 0.8);
+             backdrop-filter: blur(16px);
+             -webkit-backdrop-filter: blur(16px);
+             border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header id="header" class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <a href="#home" class="text-xl font-black gradient-text flex items-center gap-2"><i class="fa-solid fa-map-location-dot"></i>新潟観光ナビ</a>
+            <nav class="hidden lg:flex space-x-5 items-center text-sm font-semibold">
+                 <a href="#problem" class="text-gray-600 hover:text-indigo-600">課題</a>
+                <a href="#concept" class="text-gray-600 hover:text-indigo-600">コンセプト</a>
+                <a href="#attractions" class="text-gray-600 hover:text-indigo-600">新潟の魅力</a>
+                <a href="#features" class="text-gray-600 hover:text-indigo-600">アプリ概要</a>
+                <a href="#impact" class="text-gray-600 hover:text-indigo-600">期待効果</a>
+                <a href="#partners" class="text-gray-600 hover:text-indigo-600">パートナー募集</a>
+                <a href="#roadmap" class="text-gray-600 hover:text-indigo-600">ロードマップ</a>
+                <a href="#faq" class="text-gray-600 hover:text-indigo-600">FAQ</a>
+                 <a href="#contact" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-full hover:bg-indigo-700 transition duration-300">お問い合わせ</a>
+            </nav>
+            <button id="mobile-menu-button" class="lg:hidden focus:outline-none text-gray-700">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden px-6 pb-4 bg-white/90 backdrop-blur-md border-t">
+            <a href="#problem" class="block py-2 text-gray-600 hover:text-indigo-600">課題</a>
+             <a href="#concept" class="block py-2 text-gray-600 hover:text-indigo-600">コンセプト</a>
+             <a href="#attractions" class="block py-2 text-gray-600 hover:text-indigo-600">新潟の魅力</a>
+             <a href="#features" class="block py-2 text-gray-600 hover:text-indigo-600">アプリ概要</a>
+             <a href="#impact" class="block py-2 text-gray-600 hover:text-indigo-600">期待効果</a>
+             <a href="#partners" class="block py-2 text-gray-600 hover:text-indigo-600">パートナー募集</a>
+             <a href="#roadmap" class="block py-2 text-gray-600 hover:text-indigo-600">ロードマップ</a>
+             <a href="#faq" class="block py-2 text-gray-600 hover:text-indigo-600">FAQ</a>
+             <a href="#contact" class="block py-2 text-indigo-600 font-bold">お問い合わせ</a>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="home" class="section hero-bg relative text-white">
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="relative container mx-auto px-6 py-32 md:py-48 text-center">
+                <h2 class="text-4xl md:text-6xl font-black mb-4 reveal" data-reveal-origin="bottom" data-reveal-distance="50px">Z世代が<span class="gradient-text">「また行きたくなる」</span>新潟へ</h2>
+                <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8 reveal" data-reveal-delay="200">SNSでの「発見」から始まる、新しいスマート観光体験。あなたの「好き」が詰まった旅を、このアプリで。</p>
+                <div class="reveal" data-reveal-delay="400" data-reveal-origin="bottom" data-reveal-distance="20px">
+                    <a href="#features" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 transition duration-300 transform hover:scale-105 inline-block">アプリの機能を見る <i class="fa-solid fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="problem" class="section py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">新潟観光が抱える<span class="text-indigo-600">3つの課題</span></h2>
+                    <p class="text-gray-600 mt-2">Z世代に選ばれる観光地になるために、乗り越えるべき壁があります。</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                     <div class="card-bg p-8 rounded-2xl shadow-lg card-hover-effect reveal" data-reveal-origin="left">
+                        <div class="text-5xl text-indigo-500 mb-4"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <h3 class="text-xl font-bold mb-2">若者への情報到達不足</h3>
+                        <p class="text-gray-700">魅力的な観光情報がZ世代に届いておらず、旅行先の候補にすら上がっていない現状があります。</p>
+                    </div>
+                    <div class="card-bg p-8 rounded-2xl shadow-lg card-hover-effect reveal" data-reveal-delay="200">
+                        <div class="text-5xl text-pink-500 mb-4"><i class="fa-solid fa-camera-retro"></i></div>
+                        <h3 class="text-xl font-bold mb-2">SNS時代との不適合</h3>
+                        <p class="text-gray-700">「映え」や「シェア」を前提としたZ世代の行動様式に、情報発信の手段が追いついていません。</p>
+                    </div>
+                    <div class="card-bg p-8 rounded-2xl shadow-lg card-hover-effect reveal" data-reveal-origin="right" data-reveal-delay="400">
+                        <div class="text-5xl text-teal-500 mb-4"><i class="fa-solid fa-repeat"></i></div>
+                        <h3 class="text-xl font-bold mb-2">一過性の体験</h3>
+                        <p class="text-gray-700">一度訪れて満足してしまい、リピート訪問や閑散期の誘客に繋がる仕掛けが不足しています。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="concept" class="section py-20 section-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">z世代が<span class="gradient-text">『つい行きたくなる』</span><br>『誰かにシェアしたくなる』新潟を。</h2>
+                    <p class="text-gray-600 mt-2">私たちの解決策は、「発見→行動→シェア→再訪」の好循環を生み出すことです。</p>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8 mb-12">
+                     <div class="text-center reveal" data-reveal-scale="0.8">
+                        <div class="bg-indigo-100 text-indigo-600 w-24 h-24 rounded-full flex items-center justify-center text-4xl mx-auto transition-transform hover:scale-110"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <p class="mt-2 font-bold">1. 発見</p>
+                    </div>
+                    <div class="text-gray-400 text-2xl reveal" data-reveal-delay="100"><i class="fa-solid fa-chevron-right"></i></div>
+                    <div class="text-center reveal" data-reveal-scale="0.8" data-reveal-delay="200">
+                        <div class="bg-pink-100 text-pink-600 w-24 h-24 rounded-full flex items-center justify-center text-4xl mx-auto transition-transform hover:scale-110"><i class="fa-solid fa-person-walking"></i></div>
+                        <p class="mt-2 font-bold">2. 行動</p>
+                    </div>
+                    <div class="text-gray-400 text-2xl reveal" data-reveal-delay="300"><i class="fa-solid fa-chevron-right"></i></div>
+                    <div class="text-center reveal" data-reveal-scale="0.8" data-reveal-delay="400">
+                        <div class="bg-teal-100 text-teal-600 w-24 h-24 rounded-full flex items-center justify-center text-4xl mx-auto transition-transform hover:scale-110"><i class="fa-solid fa-share-nodes"></i></div>
+                        <p class="mt-2 font-bold">3. シェア</p>
+                    </div>
+                    <div class="text-gray-400 text-2xl reveal" data-reveal-delay="500"><i class="fa-solid fa-chevron-right"></i></div>
+                    <div class="text-center reveal" data-reveal-scale="0.8" data-reveal-delay="600">
+                        <div class="bg-purple-100 text-purple-600 w-24 h-24 rounded-full flex items-center justify-center text-4xl mx-auto transition-transform hover:scale-110"><i class="fa-solid fa-rotate-left"></i></div>
+                        <p class="mt-2 font-bold">4. 再訪</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="attractions" class="section py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">Z世代の心を掴む<span class="text-indigo-600">新潟の魅力</span></h2>
+                    <p class="text-gray-600 mt-2">このアプリが届ける、まだ知らない新潟のストーリー。</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card-bg rounded-xl shadow-lg overflow-hidden card-hover-effect reveal">
+                        <div class="w-full h-56 bg-gradient-to-br from-yellow-200 to-orange-200 flex items-center justify-center">
+                            <i class="fa-solid fa-utensils text-7xl text-white text-opacity-90"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">#新潟グルメ</h3>
+                            <p class="text-gray-600">日本一の米どころが育む絶品ごはん、新鮮な海の幸、そして90以上ある酒蔵の日本酒。五感を満たす食体験が待っている。</p>
+                        </div>
+                    </div>
+                    <div class="card-bg rounded-xl shadow-lg overflow-hidden card-hover-effect reveal" data-reveal-delay="200">
+                        <div class="w-full h-56 bg-gradient-to-br from-sky-200 to-blue-200 flex items-center justify-center">
+                            <i class="fa-solid fa-mountain-sun text-7xl text-white text-opacity-90"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">#エモい風景</h3>
+                            <p class="text-gray-600">日本海に沈む夕日、星空が美しい棚田、歴史を感じる港町の街並み。思わずカメラを向けたくなる、心揺さぶる景色がここに。</p>
+                        </div>
+                    </div>
+                    <div class="card-bg rounded-xl shadow-lg overflow-hidden card-hover-effect reveal" data-reveal-delay="400">
+                         <div class="w-full h-56 bg-gradient-to-br from-pink-200 to-rose-200 flex items-center justify-center">
+                            <i class="fa-solid fa-star text-7xl text-white text-opacity-90"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">#推し活とカルチャー</h3>
+                            <p class="text-gray-600">多くの漫画家・アニメクリエイターを輩出。聖地巡礼や、古町芸妓の伝統文化、アートイベントなど、ディープな体験が満載。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section py-20 section-bg">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">Z世代の行動を分析・支援する<span class="gradient-text">主な機能</span></h2>
+                    <p class="text-gray-600 mt-2">デジタルネイティブに最適化された、直感的で楽しい機能が満載です。</p>
+                </div>
+                <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+                     <div class="w-full md:w-1/2 space-y-8 reveal" data-reveal-origin="right">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-bold">パーソナライズ推薦</h3>
+                                <p class="text-gray-600">SNSの行動や興味関心をAIが分析し、あなたにピッタリの観光体験を提案します。</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-2xl"><i class="fa-solid fa-map-pin"></i></div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-bold">地図連携 "映え" スポット表示</h3>
+                                <p class="text-gray-600">GPSと連動し、近くのインスタ映えスポットや「推し活」スポットを地図上にリアルタイムで表示します。</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start">
+                             <div class="flex-shrink-0 h-12 w-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-2xl"><i class="fa-solid fa-bell"></i></div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-bold">再訪支援機能</h3>
+                                <p class="text-gray-600">お気に入りに登録した場所の季節イベントや新着情報をプッシュ通知。再訪のきっかけを作ります。</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start">
+                             <div class="flex-shrink-0 h-12 w-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-2xl"><i class="fa-solid fa-hand-pointer"></i></div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-bold">直感的なUIデザイン</h3>
+                                <p class="text-gray-600">スワイプやタップ操作を中心とした、ストレスフリーでサクサク使えるインターフェースです。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 reveal" data-reveal-origin="left" data-reveal-delay="200">
+                        <div class="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl">
+                            <div class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                            <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                            <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+                            <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+                            <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white">
+                               <iframe 
+                                    class="w-full h-full border-0"
+                                    loading="lazy"
+                                    allowfullscreen
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12674.675769275037!2d139.0493923485301!3d37.91571599818868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff4c9523b4352e7%3A0x69601053a778d91c!2z5paw5r2f6aeF!5e0!3m2!1sja!2sjp!4v1688536998123!5m2!1sja!2sjp">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="section py-20">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">アプリがもたらす<span class="text-indigo-600">持続可能な未来</span></h2>
+                    <p class="text-gray-600 mt-2">観光客と地域、双方に価値を提供します。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12">
+                     <div class="card-bg p-8 rounded-xl shadow-lg card-hover-effect reveal">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center gap-3"><i class="fa-solid fa-face-smile text-green-500 text-3xl"></i> <span>Z世代観光客にとって</span></h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start"><span class="text-green-500 mr-2 mt-1"><i class="fa-solid fa-check-circle"></i></span> 自分好みの体験が見つかる、あなただけの旅</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2 mt-1"><i class="fa-solid fa-check-circle"></i></span> スマホひとつで検索から予約まで完結</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2 mt-1"><i class="fa-solid fa-check-circle"></i></span> 「推し活」スポットも一目でわかる</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2 mt-1"><i class="fa-solid fa-check-circle"></i></span> 映えスポットを友達と簡単シェア</li>
+                        </ul>
+                    </div>
+                     <div class="card-bg p-8 rounded-xl shadow-lg card-hover-effect reveal" data-reveal-delay="200">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center gap-3"><i class="fa-solid fa-city text-blue-500 text-3xl"></i> <span>新潟市・運営にとって</span></h3>
+                        <ul class="space-y-3 text-gray-700">
+                             <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1"><i class="fa-solid fa-check-circle"></i></span> 新しい観光客層(Z世代)の獲得</li>
+                             <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1"><i class="fa-solid fa-check-circle"></i></span> イベントや施設への流入・回遊性向上</li>
+                             <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1"><i class="fa-solid fa-check-circle"></i></span> 観光経済の活性化とリピーター増加</li>
+                             <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1"><i class="fa-solid fa-check-circle"></i></span> 持続可能な観光モデルの実現</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="partners" class="section particles-bg py-20">
+            <div id="particles-js"></div>
+            <div class="content-over-particles container mx-auto px-6">
+                <div class="text-center text-white reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">地域の皆様へ</h2>
+                    <p class="max-w-3xl mx-auto mb-8 text-slate-200">このプロジェクトは、新潟の魅力をZ世代に届け、地域全体を盛り上げるためのものです。飲食店、宿泊施設、文化施設、自治体の皆様、私たちと一緒に新しい観光の形を作りませんか？</p>
+                    <a href="#contact" class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full hover:bg-slate-200 transition duration-300 transform hover:scale-105 inline-block">事業連携について問い合わせる</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section section-bg py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">プロジェクト<span class="gradient-text">ロードマップ</span></h2>
+                    <p class="text-gray-600 mt-2">計画的にプロジェクトを推進し、最高のアプリを届けます。</p>
+                </div>
+                <div class="relative wrap overflow-hidden p-10">
+                    <div class="border-2-2 absolute border-opacity-20 border-indigo-300 h-full border" style="left: 50%"></div>
+                     <div class="mb-8 flex justify-between items-center w-full right-timeline reveal" data-reveal-origin="right">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-indigo-600 shadow-xl w-12 h-12 rounded-full">
+                            <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
+                        </div>
+                        <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-gray-800 text-xl">6月: ヒアリング・要件定義</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-600">ユーザーニーズ調査とプロジェクトの方向性を確定します。</p>
+                        </div>
+                    </div>
+                    <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline reveal" data-reveal-origin="left">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-indigo-600 shadow-xl w-12 h-12 rounded-full">
+                            <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
+                        </div>
+                        <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-gray-800 text-xl">7-8月: コンセプト・UI設計</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-600">ユーザーインターフェイスとエクスペリエンスをデザインします。</p>
+                        </div>
+                    </div>
+                    <div class="mb-8 flex justify-between items-center w-full right-timeline reveal" data-reveal-origin="right">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-indigo-600 shadow-xl w-12 h-12 rounded-full">
+                            <h1 class="mx-auto font-semibold text-lg text-white">3</h1>
+                        </div>
+                        <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-gray-800 text-xl">9月: プロトタイプ開発</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-600">機能実装とテスト環境の構築を行います。</p>
+                        </div>
+                    </div>
+                     <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline reveal" data-reveal-origin="left">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-indigo-600 shadow-xl w-12 h-12 rounded-full">
+                            <h1 class="mx-auto text-white font-semibold text-lg">4</h1>
+                        </div>
+                        <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-gray-800 text-xl">10月: 実証実験</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-600">モニターユーザーによる実地テストとデータ収集を行います。</p>
+                        </div>
+                    </div>
+                    <div class="mb-8 flex justify-between items-center w-full right-timeline reveal" data-reveal-origin="right">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-indigo-600 shadow-xl w-12 h-12 rounded-full">
+                            <h1 class="mx-auto font-semibold text-lg text-white">5</h1>
+                        </div>
+                        <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <h3 class="font-bold text-gray-800 text-xl">11月: 正式リリース</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-600">フィードバックを元に改善し、一般公開と効果測定を開始します。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">FAQ <span class="text-indigo-600">- よくあるご質問 -</span></h2>
+                    <p class="text-gray-600 mt-2">プロジェクトに関する疑問にお答えします。</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="accordion-item card-bg rounded-lg shadow-sm reveal">
+                        <button class="accordion-button w-full text-left p-5 font-semibold flex justify-between items-center">
+                            <span>アプリの利用は無料ですか？</span>
+                            <i class="icon fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p class="p-5 pt-0 text-gray-600">はい、アプリの基本的な機能はすべて無料でご利用いただけます。将来的には、特別な体験ができる有料オプションなどを検討する可能性があります。</p>
+                        </div>
+                    </div>
+                     <div class="accordion-item card-bg rounded-lg shadow-sm reveal">
+                        <button class="accordion-button w-full text-left p-5 font-semibold flex justify-between items-center">
+                            <span>どのエリアが対象ですか？</span>
+                            <i class="icon fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p class="p-5 pt-0 text-gray-600">まずは新潟市中心部からサービスを開始し、順次、新潟県全域に対象エリアを拡大していく計画です。</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item card-bg rounded-lg shadow-sm reveal">
+                        <button class="accordion-button w-full text-left p-5 font-semibold flex justify-between items-center">
+                            <span>個人情報の扱いはどうなっていますか？</span>
+                            <i class="icon fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p class="p-5 pt-0 text-gray-600">個人情報の保護は最優先事項です。関連法規を遵守し、データは匿名化して統計的に分析します。パーソナライズ推薦機能は、ユーザーの許可を得た上で提供されます。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section section-bg py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">お問い合わせ</h2>
+                    <p class="text-gray-600 mt-2">プロジェクトに関するご質問、事業連携のご相談はこちらから。</p>
+                </div>
+                <form action="#" method="POST" class="max-w-xl mx-auto bg-white/70 p-8 rounded-xl shadow-lg reveal">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 font-bold mb-2">お名前</label>
+                        <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white/50">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-700 font-bold mb-2">メールアドレス</label>
+                        <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white/50">
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-gray-700 font-bold mb-2">お問い合わせ内容</label>
+                        <textarea id="message" name="message" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white/50"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 transition duration-300 transform hover:scale-105">送信する</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+                <div class="md:col-span-1">
+                    <h3 class="text-lg font-black gradient-text">新潟観光ナビ</h3>
+                    <p class="text-gray-400 mt-2 text-sm">Z世代が「また行きたくなる」新潟へ。</p>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-2">サイトマップ</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li><a href="#problem" class="text-gray-400 hover:text-white">課題</a></li>
+                        <li><a href="#concept" class="text-gray-400 hover:text-white">コンセプト</a></li>
+                        <li><a href="#attractions" class="text-gray-400 hover:text-white">新潟の魅力</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white">アプリ概要</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="font-bold mb-2">関連リンク</h3>
+                    <ul class="space-y-1 text-sm">
+                         <li><a href="#partners" class="text-gray-400 hover:text-white">パートナー募集</a></li>
+                         <li><a href="#faq" class="text-gray-400 hover:text-white">FAQ</a></li>
+                         <li><a href="https://www.city.niigata.lg.jp/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">新潟市公式サイト <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-2">フォローする</h3>
+                    <div class="flex justify-center md:justify-start space-x-4 text-2xl">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500">
+                <p>© 2024 新潟スマート観光支援プロジェクト (Super CAT). All Rights Reserved.</p>
+                <p class="mt-1">このサイトは企画内容を説明するためのサンプルです。</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // メニューのトグル
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = mobileMenuButton.querySelector('i');
+        
+        const toggleMenu = () => {
+            mobileMenu.classList.toggle('hidden');
+            const isHidden = mobileMenu.classList.contains('hidden');
+            mobileMenuIcon.classList.toggle('fa-bars', isHidden);
+            mobileMenuIcon.classList.toggle('fa-xmark', !isHidden);
+        };
+
+        mobileMenuButton.addEventListener('click', toggleMenu);
+
+        document.querySelectorAll('#mobile-menu a, #header a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(link.getAttribute('href').startsWith('#')) {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMenu();
+                    }
+                }
+            });
+        });
+
+        // ヘッダーの影
+        window.addEventListener('scroll', () => {
+            document.getElementById('header').classList.toggle('shadow-md', window.scrollY > 10);
+        });
+
+        // ★★★ ここもおまけで修正しといたぜ！ ★★★
+        // スクロールアニメーション
+        document.querySelectorAll('.reveal').forEach(el => {
+            const origin = el.getAttribute('data-reveal-origin') || 'bottom';
+            const distance = el.getAttribute('data-reveal-distance') || '50px';
+            const delay = parseInt(el.getAttribute('data-reveal-delay')) || 0;
+            const scale = parseFloat(el.getAttribute('data-reveal-scale')) || 1;
+
+            ScrollReveal().reveal(el, { origin, distance, delay, scale });
+        });
+
+        // アコーディオン (FAQ)
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const currentlyActive = document.querySelector('.accordion-button.active');
+                if (currentlyActive && currentlyActive !== button) {
+                    currentlyActive.classList.remove('active');
+                }
+                button.classList.toggle('active');
+            });
+        });
+        
+        // パーティクル背景
+        if(document.getElementById('particles-js')) {
+            particlesJS('particles-js', {
+              "particles": {
+                "number": {
+                  "value": 80,
+                  "density": {
+                    "enable": true,
+                    "value_area": 800
+                  }
+                },
+                "color": {
+                  "value": "#ffffff"
+                },
+                "shape": {
+                  "type": "circle",
+                },
+                "opacity": {
+                  "value": 0.5,
+                  "random": false,
+                  "anim": {
+                    "enable": false
+                  }
+                },
+                "size": {
+                  "value": 3,
+                  "random": true,
+                  "anim": {
+                    "enable": false
+                  }
+                },
+                "line_linked": {
+                  "enable": true,
+                  "distance": 150,
+                  "color": "#ffffff",
+                  "opacity": 0.4,
+                  "width": 1
+                },
+                "move": {
+                  "enable": true,
+                  "speed": 2,
+                  "direction": "none",
+                  "random": false,
+                  "straight": false,
+                  "out_mode": "out",
+                  "bounce": false,
+                }
+              },
+              "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                  "onhover": {
+                    "enable": true,
+                    "mode": "repulse"
+                  },
+                  "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                  },
+                  "resize": true
+                },
+                "modes": {
+                  "repulse": {
+                    "distance": 100,
+                    "duration": 0.4
+                  },
+                  "push": {
+                    "particles_nb": 4
+                  }
+                }
+              },
+              "retina_detect": true
+            });
+        }
+    </script>
+</body>
+</html>
