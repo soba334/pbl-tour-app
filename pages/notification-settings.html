@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>通知設定</title>
+  <link rel="stylesheet" href="../style/notification-settings.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="back-button-box">
+      <button class="back-button" onclick="location.href='event_calendar.html'">← 戻る</button>
+    </div>
+
+    <h1 class="title">通知設定</h1>
+
+    <div class="toggle-group">
+      <label class="toggle-label">
+        イベントのお知らせ
+        <input type="checkbox" id="notifyEvent" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="section-title">季節イベント</div>
+
+    <div class="toggle-group">
+      <label class="toggle-label">春イベント
+        <input type="checkbox" id="springEvent" checked />
+        <span class="slider"></span>
+      </label>
+
+      <label class="toggle-label">夏イベント
+        <input type="checkbox" id="summerEvent" checked />
+        <span class="slider"></span>
+      </label>
+
+      <label class="toggle-label">秋イベント
+        <input type="checkbox" id="autumnEvent" checked />
+        <span class="slider"></span>
+      </label>
+
+      <label class="toggle-label">冬イベント
+        <input type="checkbox" id="winterEvent" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- 外部JSを読み込み -->
+  <script src="../js/notification-settings.js"></script>
+</body>
+</html>
