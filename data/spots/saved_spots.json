@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "清津峡",
+    "category": "観光地",
+    "rating": 4.8,
+    "image": "../../images/spots/spot1.jpeg",
+    "isFavorite": true,
+    "visitedDates": ["2024/12/11", "2024/12/11", "2024/12/11"]
+  },
+  {
+    "id": 2,
+    "name": "藤麻堂山あじさい園",
+    "category": "観光地",
+    "rating": 4.8,
+    "image": "../../images/spots/spot2.jpeg",
+    "isFavorite": false,
+    "visitedDates": []
+  },
+  {
+    "id": 3,
+    "name": "ヒスイ海岸",
+    "category": "観光地",
+    "rating": 4.8,
+    "image": "../../images/spots/spot3.jpg",
+    "isFavorite": true,
+    "visitedDates": []
+  },
+  {
+    "id": 4,
+    "name": "東希谷連瀑洞門",
+    "category": "観光地",
+    "rating": 4.8,
+    "image": "../../images/spots/spot4.jpeg",
+    "isFavorite": false,
+    "visitedDates": []
+  },
+  {
+    "id": 5,
+    "name": "森のカフェゆらり",
+    "category": "カフェ",
+    "rating": 4.6,
+    "image": "../../images/spots/spot5.png",
+    "isFavorite": true,
+    "visitedDates": ["2024/11/01"]
+  },
+  {
+    "id": 6,
+    "name": "海辺のレストランAqua",
+    "category": "レストラン",
+    "rating": 4.7,
+    "image": "../../images/spots/spot6.png",
+    "isFavorite": false,
+    "visitedDates": ["2024/10/10", "2024/08/20"]
+  }
+]
