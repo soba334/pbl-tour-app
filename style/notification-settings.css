@@ -1,0 +1,87 @@
+body {
+  font-family: sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.back-button-box {
+  margin-bottom: 8px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.section-title {
+  font-size: 16px;
+  margin: 24px 0 8px;
+  font-weight: bold;
+}
+
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toggle-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  padding: 12px;
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+.toggle-label input[type="checkbox"] {
+  display: none;
+}
+
+.slider {
+  width: 40px;
+  height: 22px;
+  background-color: #ccc;
+  border-radius: 22px;
+  position: relative;
+  transition: 0.2s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+input[type="checkbox"]:checked + .slider {
+  background-color: #4cd964;
+}
+
+input[type="checkbox"]:checked + .slider::before {
+  transform: translateX(18px);
+}
