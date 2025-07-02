@@ -1,0 +1,152 @@
+/* 共通設定 */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #fff;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.image-box {
+  text-align: center;
+}
+
+.coupon-img {
+  width: 40%;
+  max-width: 180px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* === スワイプビュー === */
+.swipe-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  transition: background-color 0.4s ease;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.swipe-wrapper {
+  display: flex;
+  width: 200%; /* ← 2スライド分 */
+  transition: transform 0.4s ease;
+}
+
+.swipe-slide {
+  width: 50%; /* ← 親に対して2枚分なので1枚 = 50% */
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* 背景テーマ */
+.swipe-container.use-bg {
+  background-color: #fff0f0;
+}
+.swipe-container.barcode-bg {
+  background-color: #f0f4ff;
+}
+
+/* ボタン */
+.use-button {
+  width: 80%;
+  max-width: 300px;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: #ffecec;
+  border: 1px solid #f4aaaa;
+  border-radius: 12px;
+  color: #333;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+.use-button:hover {
+  background: #ffdede;
+}
+
+/* バーコード */
+#barcode {
+  width: 60%;
+  max-width: 280px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.code {
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+/* 注意書き */
+.notes {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.back-button-box {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.back-button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  background-color: #ffecec;
+  border: 1px solid #f4aaaa;
+  border-radius: 12px;
+  color: #333;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #ffdede;
+}
+
+/* ===== メディアクエリで画面幅ごとに微調整 ===== */
+@media screen and (min-width: 768px) {
+  .coupon-img {
+    width: 160px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .use-button {
+    font-size: 1.3rem;
+  }
+
+  .code {
+    font-size: 1.1rem;
+  }
+
+  #barcode {
+    width: 220px;
+  }
+}
