@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>クーポン詳細</title>
+  <link rel="stylesheet" href="../style/coupon-detail.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- 統一感のある戻るボタン -->
+    <div class="back-button-box">
+      <a href="coupon-list.html" class="back-button">← クーポン一覧へ戻る</a>
+    </div>
+
+    <div class="image-box">
+      <img id="couponImage" class="coupon-img" src="" alt="クーポン画像" />
+      <div id="couponTitle" class="title">クーポン名</div>
+    </div>
+
+    <!-- ✅ スワイプコンテナ -->
+    <div class="swipe-container use-bg" id="swipeContainer">
+      <div class="swipe-wrapper" id="swipeWrapper">
+        <!-- 使用ボタン -->
+        <div class="swipe-slide" id="slideUse">
+          <button class="use-button" id="useButton">使用する</button>
+        </div>
+        <!-- バーコード -->
+        <div class="swipe-slide" id="slideBarcode">
+          <svg id="barcode"></svg>
+          <div class="code" id="codeText">読み込み中...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ 注意事項 -->
+    <div class="notes" id="couponNotes">
+      <!-- JSで挿入されます -->
+    </div>
+  </div>
+
+  <script src="../js/coupon-detail.js"></script>
+</body>
+</html>
