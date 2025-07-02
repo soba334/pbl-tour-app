@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>イベント詳細</title>
+  <link rel="stylesheet" href="../style/event-detail.css" />
+</head>
+<body>
+  <button onclick="history.back()">← 戻る</button>
+
+  <div class="event-detail-container">
+    <h1 id="event-title"></h1>
+    <div id="event-date"></div>
+    <img id="event-image" src="" alt="イベント画像" />
+
+    <div id="event-info"></div>
+    <div id="event-time"></div>
+
+    <!-- 会場・住所・地図リンク -->
+    <div id="event-place">
+      <div id="event-place-text">
+        <strong>会場：</strong><span id="place-name"></span><br>
+        <strong>住所：</strong><span id="place-address"></span>
+      </div>
+      <a id="map-link" href="#" target="_blank">📍 Googleマップで見る</a>
+    </div>
+
+    <div id="event-fee"></div>
+    <div id="event-notes"></div>
+    <div id="event-contact"></div>
+  </div>
+
+  <script src="../js/event-detail.js"></script>
+</body>
+</html>
