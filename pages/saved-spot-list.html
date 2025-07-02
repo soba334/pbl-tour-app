@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>保存済みスポット一覧</title>
+  <link rel="stylesheet" href="../style/saved-spot.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- 🔍 検索バー -->
+    <input type="text" id="searchBar" placeholder="検索" />
+
+    <!-- 🧭 カテゴリタブ -->
+    <div class="category-tabs">
+      <button class="tab active" data-category="all">すべて</button>
+      <button class="tab" data-category="favorite">お気に入り</button>
+      <button class="tab" data-category="観光地">観光地</button>
+      <button class="tab" data-category="カフェ">カフェ</button>
+      <button class="tab" data-category="レストラン">レストラン</button>
+    </div>
+
+    <!-- 📄 スポットカード表示エリア -->
+    <div id="spotList" class="spot-list">
+      <!-- JavaScriptでスポットカードが挿入されます -->
+    </div>
+
+  </div>
+
+  <!-- 📜 スクリプト -->
+  <script src="../js/saved-spot.js" defer></script>
+</body>
+</html>
