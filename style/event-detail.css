@@ -1,0 +1,99 @@
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+button {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.event-detail-container {
+  background: #fff;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+#event-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+#event-date {
+  text-align: center;
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+#event-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0 auto 1rem auto;
+  background-color: #eee;
+}
+
+.event-detail-container > div {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.event-detail-container > div::before {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 0.3em;
+  color: #222;
+}
+
+#event-info::before     { content: "情報更新日：" }
+#event-time::before     { content: "開催時間：" }
+#event-place::before    { content: "会場：" }
+#event-fee::before      { content: "料金：" }
+#event-notes::before    { content: "備考：" }
+#event-contact::before  { content: "問い合わせ先：" }
+
+/* モバイル最適化 */
+@media screen and (max-width: 600px) {
+  .event-detail-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  button {
+    margin-left: 1rem;
+    font-size: 0.95rem;
+  }
+
+  #event-title {
+    font-size: 1.1rem;
+  }
+
+  .event-detail-container > div {
+    font-size: 0.9rem;
+  }
+}
+
+#event-place a {
+  display: inline-block;
+  margin-top: 0.3em;
+  font-size: 0.9rem;
+  color: #3366cc;
+  text-decoration: underline;
+}
