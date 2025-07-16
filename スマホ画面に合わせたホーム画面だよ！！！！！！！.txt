@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>にいがたび UIクローン</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+   <script src="https://unpkg.com/lucide@latest"></script>
+   <style>
+       /* M PLUS Rounded 1c フォントを適用 */
+       body {
+           font-family: 'M PLUS Rounded 1c', sans-serif;
+       }
+       /* スクロールバーを非表示にする */
+       .no-scrollbar::-webkit-scrollbar {
+           display: none;
+       }
+       .no-scrollbar {
+           -ms-overflow-style: none;
+           scrollbar-width: none;
+       }
+      
+       /* --- ここからアニメーションとスタイルの追加 --- */
+
+
+       /* 背景グラデーションのアニメーション */
+       @keyframes gradient-animation {
+           0% { background-position: 0% 50%; }
+           50% { background-position: 100% 50%; }
+           100% { background-position: 0% 50%; }
+       }
+       .animated-gradient {
+           background-size: 200% 200%;
+           animation: gradient-animation 15s ease infinite;
+       }
+
+
+       /* 要素のフェードイン＆スライドアップアニメーション */
+       @keyframes fade-slide-in {
+           from {
+               opacity: 0;
+               transform: translateY(20px);
+           }
+           to {
+               opacity: 1;
+               transform: translateY(0);
+           }
+       }
+      
+       /* アニメーションを適用するクラス */
+       .animate-on-load {
+           animation: fade-slide-in 0.6s ease-out forwards;
+           opacity: 0; /* 初期状態は非表示 */
+       }
+
+
+       /* モーダルの表示アニメーション */
+       @keyframes modal-in {
+           from {
+               opacity: 0;
+               transform: scale(0.9);
+           }
+           to {
+               opacity: 1;
+               transform: scale(1);
+           }
+       }
+      
+       /* モーダルの非表示アニメーション */
+       @keyframes modal-out {
+           from {
+               opacity: 1;
+               transform: scale(1);
+           }
+           to {
+               opacity: 0;
+               transform: scale(0.9);
+           }
+       }
+
+
+       .modal-enter {
+           animation: modal-in 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+       }
+      
+       .modal-leave {
+           animation: modal-out 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+       }
+   </style>
+</head>
+<body class="bg-gray-800 flex items-center justify-center min-h-screen">
+
+
+   <!-- スマホ画面のコンテナ -->
+   <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+       <div class="w-full h-full overflow-y-auto no-scrollbar">
+           <!-- 背景のグラデーション（アニメーション付き） -->
+           <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+
+
+           <!-- 上部のノッチ（飾り） -->
+           <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+
+
+           <div class="p-6 pt-10">
+               <!-- ヘッダー -->
+               <header class="flex justify-between items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
+                   <h1 class="text-xl font-bold text-gray-800">にいがたび</h1>
+                   <i data-lucide="search" class="text-gray-700 cursor-pointer"></i>
+               </header>
+
+
+               <!-- メインコンテンツ -->
+               <main>
+                   <!-- キャッチコピー -->
+                   <div class="mb-6 animate-on-load" style="animation-delay: 200ms;">
+                       <h2 class="text-3xl font-extrabold text-gray-800 leading-tight">心、はずむままに。<br>新潟市を旅しよう。</h2>
+                       <p class="mt-2 text-gray-600 font-medium">新しい「好き」を見つける冒険へ</p>
+                   </div>
+
+
+                   <!-- 検索バー -->
+                   <div class="relative mb-6 animate-on-load" style="animation-delay: 300ms;">
+                       <input type="text" placeholder="例: 古町、ランチ、インスタ映え" class="w-full py-3 pl-4 pr-10 bg-white/50 backdrop-blur-md border border-white/30 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                       <i data-lucide="search" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                   </div>
+
+
+                   <!-- アイコンメニュー (ボタンサイズ統一) -->
+                   <!-- 'aspect-square' を使うことで、各ボタンの高さが幅と常に同じになり、グリッド内の全ボタンが同じ正方形になります。 -->
+                   <div class="grid grid-cols-5 gap-3 mb-4">
+                       <div class="clickable-button flex flex-col items-center justify-center bg-emerald-400/80 backdrop-blur-md text-white p-2 rounded-xl aspect-square shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl animate-on-load" style="animation-delay: 400ms;">
+                           <i data-lucide="map-pin" class="w-7 h-7 mb-1"></i>
+                           <span class="text-xs font-bold">スポット</span>
+                       </div>
+                       <div class="clickable-button flex flex-col items-center justify-center bg-emerald-400/80 backdrop-blur-md text-white p-2 rounded-xl aspect-square shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl animate-on-load" style="animation-delay: 450ms;">
+                           <i data-lucide="calendar-plus" class="w-7 h-7 mb-1"></i>
+                           <span class="text-xs font-bold">予約</span>
+                       </div>
+                       <div class="clickable-button flex flex-col items-center justify-center bg-yellow-400/80 backdrop-blur-md text-white p-2 rounded-xl aspect-square shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl animate-on-load" style="animation-delay: 500ms;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><path d="M4 12h16"/></svg>
+                           <span class="text-xs font-bold">投稿</span>
+                       </div>
+                       <div class="clickable-button flex flex-col items-center justify-center bg-emerald-400/80 backdrop-blur-md text-white p-2 rounded-xl aspect-square shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl animate-on-load" style="animation-delay: 550ms;">
+                           <i data-lucide="heart" class="w-7 h-7 mb-1"></i>
+                           <span class="text-xs font-bold">お気に入り</span>
+                       </div>
+                       <div class="clickable-button flex flex-col items-center justify-center bg-emerald-400/80 backdrop-blur-md text-white p-2 rounded-xl aspect-square shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl animate-on-load" style="animation-delay: 600ms;">
+                           <i data-lucide="share-2" class="w-7 h-7 mb-1"></i>
+                           <!-- ↓ ここの不要なスタイルを削除したぜ！ -->
+                           <span class="text-xs font-bold text-center">みんな<br>の投稿</span>
+                       </div>
+                   </div>
+
+
+                   <!-- ボタンリンク -->
+                   <div class="grid grid-cols-2 gap-4 mb-6">
+                       <button class="clickable-button w-full flex items-center justify-center bg-white/50 backdrop-blur-md border border-white/30 text-gray-700 font-bold py-4 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl animate-on-load" style="animation-delay: 700ms;">
+                           <i data-lucide="calendar-days" class="mr-2"></i>
+                           イベント情報
+                       </button>
+                       <button class="clickable-button w-full flex items-center justify-center bg-white/50 backdrop-blur-md border border-white/30 text-gray-700 font-bold py-4 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl animate-on-load" style="animation-delay: 750ms;">
+                           <i data-lucide="ticket" class="mr-2"></i>
+                           クーポン
+                       </button>
+                   </div>
+
+
+                   <!-- お知らせと再生ボタン -->
+                   <div class="clickable-button flex items-center justify-between bg-white/50 backdrop-blur-md border border-white/30 p-3 rounded-xl shadow-lg mb-4 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl animate-on-load" style="animation-delay: 800ms;">
+                       <div class="flex items-center">
+                           <i data-lucide="bell" class="text-emerald-500 mr-3"></i>
+                           <span class="font-bold text-gray-700">お知らせ</span>
+                       </div>
+                       <i data-lucide="chevron-right" class="text-gray-400"></i>
+                   </div>
+                  
+                   <div class="clickable-button flex items-center justify-between bg-white/50 backdrop-blur-md border border-white/30 p-3 rounded-xl shadow-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl animate-on-load" style="animation-delay: 850ms;">
+                       <div class="flex items-center">
+                           <div class="w-6 h-6 mr-3 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><path d="M9 9c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/></svg>
+                           </div>
+                           <span class="font-bold text-gray-700">にいがた旅Play</span>
+                       </div>
+                       <button class="bg-blue-500 text-white px-4 py-1 rounded-full flex items-center text-sm pointer-events-none">
+                           <i data-lucide="play" class="w-4 h-4 fill-white mr-1"></i>
+                           Play
+                       </button>
+                   </div>
+
+
+               </main>
+           </div>
+       </div>
+   </div>
+
+
+   <!-- メッセージ表示用のモーダル -->
+   <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+       <div id="modal-content" class="bg-white/70 backdrop-blur-xl p-8 rounded-2xl shadow-xl text-center max-w-sm w-full">
+           <p id="modal-message" class="mb-6 text-lg font-bold text-gray-800"></p>
+           <button id="close-modal" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full transition-colors">閉じる</button>
+       </div>
+   </div>
+
+
+   <script>
+       // Lucideアイコンの初期化
+       lucide.createIcons();
+
+
+       // --- ここからボタンの機能とアニメーションを制御 ---
+
+
+       // 必要な要素を取得
+       const modal = document.getElementById('message-modal');
+       const modalContent = document.getElementById('modal-content');
+       const modalMessage = document.getElementById('modal-message');
+       const closeModalBtn = document.getElementById('close-modal');
+       const clickableElements = document.querySelectorAll('.clickable-button');
+
+
+       // モーダルを閉じる関数
+       const closeModal = () => {
+           modalContent.classList.remove('modal-enter');
+           modalContent.classList.add('modal-leave');
+           setTimeout(() => {
+               modal.classList.add('hidden');
+           }, 300); // アニメーションの時間と合わせる
+       };
+
+
+       // クリック可能な各要素にイベントリスナーを設定
+       clickableElements.forEach(el => {
+           el.addEventListener('click', () => {
+               // ボタンの名前を取得
+               const buttonName = el.querySelector('span')?.innerText.trim().replace(/\n/g, '') || el.innerText.trim().replace(/\n/g, '');
+              
+               // モーダルにメッセージを設定して表示
+               modalMessage.textContent = `「${buttonName}」がクリックされたぜ！`;
+               modal.classList.remove('hidden');
+               modalContent.classList.remove('modal-leave');
+               modalContent.classList.add('modal-enter');
+           });
+       });
+
+
+       // 閉じるボタンとモーダルの背景クリックでモーダルを閉じる
+       closeModalBtn.addEventListener('click', closeModal);
+       modal.addEventListener('click', (e) => {
+           if (e.target === modal) {
+               closeModal();
+           }
+       });
+   </script>
+</body>
+</html>
