@@ -98,6 +98,53 @@ body {
     animation-delay: 100ms;
 }
 
+/* タブナビゲーション */
+.tab-btn {
+    @apply text-gray-600 bg-transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-btn.active {
+    @apply bg-white text-emerald-600 shadow-md;
+    transform: translateY(-1px);
+}
+
+.tab-btn:hover:not(.active) {
+    @apply bg-white/50 text-gray-800;
+}
+
+/* フォーム要素 */
+.form-group {
+    @apply relative;
+}
+
+.form-label {
+    @apply block text-sm font-semibold text-gray-700;
+}
+
+.form-input {
+    @apply w-full p-4 bg-white/80 backdrop-blur-sm border-2 border-gray-100 rounded-xl;
+    @apply focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400;
+    @apply transition-all duration-300 shadow-sm hover:shadow-md;
+}
+
+.form-input:focus {
+    @apply bg-white transform scale-[1.02];
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+}
+
+/* モバイルカード */
+.mobile-card {
+    @apply bg-white/60 backdrop-blur-md border border-white/30 rounded-2xl p-6 shadow-lg;
+}
+
+/* リストアイテム */
+.mobile-list-item {
+    @apply bg-white/70 backdrop-blur-sm border border-white/20 rounded-xl p-4;
+    @apply transition-all duration-300 hover:shadow-lg hover:scale-105;
+    @apply focus:outline-none focus:ring-2 focus:ring-emerald-400;
+}
+
 .mobile-title {
     @apply text-xl font-bold text-gray-800;
 }

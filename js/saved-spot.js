@@ -1,6 +1,7 @@
 let spotsData = [];
 let currentCategory = "all";
 let searchKeyword = "";
+let isInitialLoad = true;
 
 // 初期化
 onDOMReady(async () => {
@@ -10,6 +11,7 @@ onDOMReady(async () => {
   setupTabs();
   setupSearchBar();
   renderSpotList(spotsData);
+  isInitialLoad = false; // 初回描画完了後はアニメーション無効
 });
 
 // タブのクリックイベント設定
@@ -62,8 +64,10 @@ function renderSpotList(data) {
 
   filtered.forEach((spot, index) => {
     const card = document.createElement("div");
-    card.className = "mobile-list-item animate-on-load";
-    card.style.animationDelay = `${(index + 3) * 100}ms`;
+    card.className = isInitialLoad ? "mobile-list-item animate-on-load" : "mobile-list-item";
+    if (isInitialLoad) {
+      card.style.animationDelay = `${(index + 3) * 100}ms`;
+    }
 
     card.innerHTML = `
       <div class="flex items-center space-x-4">
@@ -108,6 +112,24 @@ function toggleFavorite(id) {
   const spot = spotsData.find(s => s.id === id);
   if (spot) {
     spot.isFavorite = !spot.isFavorite;
-    renderSpotList(spotsData);
+    
+    // 該当のハートボタンのみを更新
+    const heartButton = document.querySelector(`button[onclick="toggleFavorite(${id})"]`);
+    if (heartButton) {
+      heartButton.innerHTML = spot.isFavorite ? "♥" : "♡";
+      heartButton.className = `text-xl ${spot.isFavorite ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 transition-colors`;
+      
+      // ハートボタンに小さなアニメーション効果を追加
+      heartButton.style.transform = 'scale(1.3)';
+      heartButton.style.transition = 'transform 0.2s ease';
+      setTimeout(() => {
+        heartButton.style.transform = 'scale(1)';
+      }, 200);
+    }
+    
+    // お気に入りタブが選択されている場合のみリストを再描画
+    if (currentCategory === "favorite") {
+      renderSpotList(spotsData);
+    }
   }
 }
