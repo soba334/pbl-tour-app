@@ -1,0 +1,268 @@
+/* モバイルUIスタイル（index.html用） */
+
+/* M PLUS Rounded 1c フォントを適用 */
+body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+/* スクロールバーを非表示にする */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* 背景グラデーションのアニメーション */
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-animation 15s ease infinite;
+}
+
+/* 要素のフェードイン＆スライドアップアニメーション */
+@keyframes fade-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* アニメーションを適用するクラス */
+.animate-on-load {
+    animation: fade-slide-in 0.6s ease-out forwards;
+    opacity: 0; /* 初期状態は非表示 */
+}
+
+/* モーダルの表示アニメーション */
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* モーダルの非表示アニメーション */
+@keyframes modal-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+.modal-enter {
+    animation: modal-in 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.modal-leave {
+    animation: modal-out 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* 共通スマホコンテナ */
+.mobile-container {
+    @apply w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-gray-300 relative;
+}
+
+.mobile-content {
+    @apply w-full h-full overflow-y-auto no-scrollbar;
+}
+
+.mobile-notch {
+    @apply absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-xl z-20;
+}
+
+.mobile-gradient-bg {
+    @apply absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10;
+}
+
+/* 共通ヘッダー */
+.mobile-header {
+    @apply flex justify-between items-center mb-6 animate-on-load;
+    animation-delay: 100ms;
+}
+
+.mobile-title {
+    @apply text-xl font-bold text-gray-800;
+}
+
+/* バックボタン */
+.back-button {
+    @apply flex items-center text-gray-700 cursor-pointer hover:text-gray-900 transition-colors;
+}
+
+/* 共通ボタンスタイル */
+.glass-button {
+    @apply bg-white/50 backdrop-blur-md border border-white/30 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer;
+}
+
+.icon-button {
+    @apply flex flex-col items-center justify-center backdrop-blur-md text-white rounded-xl aspect-square shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl animate-on-load;
+}
+
+.icon-button-emerald {
+    @apply bg-emerald-400/80;
+}
+
+.icon-button-yellow {
+    @apply bg-yellow-400/80;
+}
+
+.icon-button-blue {
+    @apply bg-blue-400/80;
+}
+
+.icon-button-red {
+    @apply bg-red-400/80;
+}
+
+/* 共通カードスタイル */
+.mobile-card {
+    @apply bg-white/50 backdrop-blur-md border border-white/30 rounded-xl shadow-lg p-4 mb-4 animate-on-load;
+}
+
+.mobile-card-header {
+    @apply flex justify-between items-center mb-3;
+}
+
+.mobile-card-title {
+    @apply font-bold text-gray-800 text-lg;
+}
+
+.mobile-card-subtitle {
+    @apply text-gray-600 text-sm;
+}
+
+.mobile-card-content {
+    @apply text-gray-700;
+}
+
+/* リストアイテム */
+.mobile-list-item {
+    @apply bg-white/50 backdrop-blur-md border border-white/30 rounded-xl shadow-lg p-4 mb-3 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl animate-on-load;
+}
+
+/* フォーム要素 */
+.mobile-input {
+    @apply w-full py-3 pl-4 pr-10 bg-white/50 backdrop-blur-md border border-white/30 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400;
+}
+
+.mobile-button-primary {
+    @apply bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-full transition-colors shadow-lg;
+}
+
+.mobile-button-secondary {
+    @apply bg-white/50 backdrop-blur-md border border-white/30 text-gray-700 font-bold px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg;
+}
+
+/* タブ切り替え */
+.mobile-tabs {
+    @apply flex bg-white/30 backdrop-blur-md rounded-full p-1 mb-6 shadow-lg;
+}
+
+.mobile-tab {
+    @apply flex-1 text-center py-2 px-4 rounded-full font-medium transition-all duration-300 cursor-pointer;
+}
+
+.mobile-tab.active {
+    @apply bg-white/80 text-gray-800 shadow-md;
+}
+
+.mobile-tab:not(.active) {
+    @apply text-gray-600 hover:text-gray-800;
+}
+
+/* 検索バー */
+.mobile-search-container {
+    @apply relative mb-6 animate-on-load;
+    animation-delay: 300ms;
+}
+
+.mobile-search-input {
+    @apply w-full py-3 pl-4 pr-10 bg-white/50 backdrop-blur-md border border-white/30 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400;
+}
+
+.mobile-search-icon {
+    @apply absolute right-4 top-1/2 -translate-y-1/2 text-gray-500;
+}
+
+/* グリッドレイアウト */
+.mobile-grid-2 {
+    @apply grid grid-cols-2 gap-4;
+}
+
+.mobile-grid-3 {
+    @apply grid grid-cols-3 gap-3;
+}
+
+.mobile-grid-5 {
+    @apply grid grid-cols-5 gap-3;
+}
+
+/* ステータス表示 */
+.mobile-status-badge {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-bold;
+}
+
+.mobile-status-active {
+    @apply bg-emerald-100 text-emerald-800;
+}
+
+.mobile-status-inactive {
+    @apply bg-gray-100 text-gray-800;
+}
+
+/* アニメーション遅延クラス */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+
+/* エラー状態・空状態 */
+.mobile-empty-state {
+    @apply text-center py-12 text-gray-500;
+}
+
+.mobile-error-state {
+    @apply text-center py-12 text-red-500;
+}
+
+/* ローディング */
+.mobile-loading {
+    @apply flex items-center justify-center py-12;
+}
+
+.loading-spinner {
+    @apply animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500;
+}
+
+/* メディアクエリ */
+@media (max-width: 480px) {
+    .mobile-container {
+        @apply border-4 border-gray-300 rounded-3xl max-w-full mx-2;
+    }
+    
+    .mobile-grid-5 {
+        @apply grid-cols-3 gap-2;
+    }
+}

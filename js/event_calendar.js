@@ -3,13 +3,13 @@ let selectedDate = null;
 let currentDate = new Date(2024, 2); // 初期は 2024年3月
 
 // データ読み込み
-fetch('../data/event/events.json')
-  .then(res => res.json())
-  .then(data => {
-    events = data;
+onDOMReady(async () => {
+  events = await fetchJSON('../data/event/events.json');
+  if (events) {
     renderCalendar();
     renderEvents(); // 初期表示
-  });
+  }
+});
 
 // ナビゲーション
 document.querySelector('.nav-btn.prev').addEventListener('click', () => {

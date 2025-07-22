@@ -24,7 +24,7 @@ Z世代向けのスマート観光支援Webアプリです。
 - お気に入りハートボタン（トグル）
 - JSONデータ：`data/spots/saved_spots.json`
 
-### 📅 イベントカレンダー（`pages/event_calendar.html`）
+### 📅 イベントカレンダー（`pages/event-calendar.html`）
 - カレンダーでイベントを月ごとに表示
 - イベントカードの一覧表示と検索機能
 - 「通知設定 ⚙️」ボタンから通知画面へ遷移
@@ -38,7 +38,7 @@ Z世代向けのスマート観光支援Webアプリです。
 - ブランドフィルタと検索機能
 - バーコード表示機能あり（`JsBarcode`使用）
 
-### ✍️ 体験投稿ページ（`pages/ooi_index.html`）
+### ✍️ 体験投稿ページ（`pages/experience-share.html`）
 - 写真アップロード・コメント・タグ付け・SNS連携UIあり
 
 ---

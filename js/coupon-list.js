@@ -40,45 +40,32 @@ function updateActiveBrand() {
 // クーポン描画
 function renderCoupons() {
   const keyword = searchInputEl.value.trim().toLowerCase();
-  couponListEl.innerHTML = "";
-
-  coupons
-    .filter((c) => {
-      const brandMatch = currentBrand === "すべて" || c.brand === currentBrand;
-      const keywordMatch = c.title.toLowerCase().includes(keyword);
-      return brandMatch && keywordMatch;
-    })
-    .forEach((coupon) => {
-      const card = document.createElement("div");
-      card.className = "coupon-card";
-      card.innerHTML = `
+  
+  const filteredCoupons = coupons.filter((c) => {
+    const brandMatch = currentBrand === "すべて" || c.brand === currentBrand;
+    const keywordMatch = c.title.toLowerCase().includes(keyword);
+    return brandMatch && keywordMatch;
+  });
+  
+  renderCards(couponListEl, filteredCoupons, (coupon) => {
+    return `
+      <div class="coupon-card" onclick="window.location.href='coupon-detail.html?id=${coupons.indexOf(coupon)}'">
         <img src="${coupon.image}" alt="クーポン画像" onerror="this.src='../images/coupons/default.png'" />
         <div class="title">${coupon.title}</div>
-      `;
-      card.onclick = () => {
-        // ✅ クーポン詳細ページに遷移（indexをURLパラメータで渡す）
-        window.location.href = `coupon-detail.html?id=${coupons.indexOf(coupon)}`;
-      };
-      couponListEl.appendChild(card);
-    });
+      </div>
+    `;
+  });
 }
 
 // JSON読み込み
-fetch("../data/coupons/coupons.json")
-  .then((res) => {
-    if (!res.ok) {
-      throw new Error("JSONの読み込みに失敗しました");
-    }
-    return res.json();
-  })
-  .then((data) => {
-    coupons = data;
+onDOMReady(async () => {
+  coupons = await fetchJSON("../data/coupons/coupons.json");
+  if (coupons) {
     updateActiveBrand();
     renderCoupons();
-  })
-  .catch((err) => {
-    console.error(err);
+  } else {
     couponListEl.innerHTML = "<p>クーポンを読み込めませんでした。</p>";
-  });
+  }
+});
 
-searchInputEl.addEventListener("input", renderCoupons);
+setupSearchInput(searchInputEl, () => renderCoupons());

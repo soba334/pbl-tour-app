@@ -1,4 +1,4 @@
-fetch('../../data/event/events.json')
+fetch('../data/event/events.json')
   .then(res => res.json())
   .then(events => {
     const params = new URLSearchParams(location.search);

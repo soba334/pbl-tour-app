@@ -2,35 +2,112 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>イベント詳細</title>
-  <link rel="stylesheet" href="../style/event-detail.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../css/mobile-ui.css">
 </head>
-<body>
-  <button onclick="history.back()">← 戻る</button>
+<body class="bg-white flex items-center justify-center min-h-screen">
+  <!-- スマホ画面のコンテナ -->
+  <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+    <div class="w-full h-full overflow-y-auto no-scrollbar">
+      <!-- 背景のグラデーション（アニメーション付き） -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+      
+      <!-- 上部のノッチ（飾り） -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+      
+      <div class="p-6 pt-10">
+        <!-- ヘッダー -->
+        <header class="flex justify-between items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
+          <div class="back-button flex items-center text-gray-700 cursor-pointer clickable-button" onclick="history.back()">
+            <i data-lucide="arrow-left" class="mr-2"></i>
+            <span class="font-medium">戻る</span>
+          </div>
+          <h1 class="text-xl font-bold text-gray-800">イベント詳細</h1>
+          <i data-lucide="share" class="text-gray-700 cursor-pointer clickable-button"></i>
+        </header>
+        
+        <!-- メインコンテンツ -->
+        <main>
+          <!-- イベント画像とタイトル -->
+          <div class="animate-on-load mb-6" style="animation-delay: 200ms;">
+            <div class="bg-white/50 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg overflow-hidden">
+              <img id="event-image" class="w-full h-48 object-cover" src="" alt="イベント画像" />
+              <div class="p-4">
+                <h2 id="event-title" class="text-lg font-bold text-gray-800 mb-2"></h2>
+                <div id="event-date" class="text-sm text-emerald-600 font-medium"></div>
+              </div>
+            </div>
+          </div>
 
-  <div class="event-detail-container">
-    <h1 id="event-title"></h1>
-    <div id="event-date"></div>
-    <img id="event-image" src="" alt="イベント画像" />
+          <!-- イベント詳細情報 -->
+          <div class="animate-on-load mb-6" style="animation-delay: 300ms;">
+            <div class="bg-white/50 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg p-6">
+              <h3 class="font-bold text-gray-800 mb-3 flex items-center">
+                <i data-lucide="info" class="w-5 h-5 text-blue-500 mr-2"></i>
+                イベント情報
+              </h3>
+              <div id="event-info" class="text-sm text-gray-700 mb-4"></div>
+              <div id="event-time" class="text-sm text-gray-700"></div>
+            </div>
+          </div>
 
-    <div id="event-info"></div>
-    <div id="event-time"></div>
+          <!-- 会場・住所・地図 -->
+          <div class="animate-on-load mb-6" style="animation-delay: 400ms;">
+            <div class="bg-white/50 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg p-6">
+              <h3 class="font-bold text-gray-800 mb-3 flex items-center">
+                <i data-lucide="map-pin" class="w-5 h-5 text-red-500 mr-2"></i>
+                会場情報
+              </h3>
+              <div id="event-place">
+                <div id="event-place-text" class="text-sm text-gray-700 mb-3">
+                  <div class="mb-2">
+                    <strong>会場：</strong><span id="place-name"></span>
+                  </div>
+                  <div>
+                    <strong>住所：</strong><span id="place-address"></span>
+                  </div>
+                </div>
+                <a id="map-link" href="#" target="_blank" class="w-full flex items-center justify-center bg-red-400/80 backdrop-blur-md text-white font-bold py-3 rounded-xl shadow-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                  <i data-lucide="map" class="w-4 h-4 mr-2"></i>
+                  Googleマップで見る
+                </a>
+              </div>
+            </div>
+          </div>
 
-    <!-- 会場・住所・地図リンク -->
-    <div id="event-place">
-      <div id="event-place-text">
-        <strong>会場：</strong><span id="place-name"></span><br>
-        <strong>住所：</strong><span id="place-address"></span>
+          <!-- その他の情報 -->
+          <div class="animate-on-load mb-6" style="animation-delay: 500ms;">
+            <div class="bg-white/50 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg p-6">
+              <h3 class="font-bold text-gray-800 mb-3 flex items-center">
+                <i data-lucide="ticket" class="w-5 h-5 text-purple-500 mr-2"></i>
+                参加費・お問い合わせ
+              </h3>
+              <div id="event-fee" class="text-sm text-gray-700 mb-3"></div>
+              <div id="event-contact" class="text-sm text-gray-700 mb-3"></div>
+              <div id="event-notes" class="text-sm text-gray-700"></div>
+            </div>
+          </div>
+        </main>
       </div>
-      <a id="map-link" href="#" target="_blank">📍 Googleマップで見る</a>
     </div>
-
-    <div id="event-fee"></div>
-    <div id="event-notes"></div>
-    <div id="event-contact"></div>
   </div>
 
+  <!-- メッセージ表示用のモーダル -->
+  <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+    <div id="modal-content" class="bg-white/70 backdrop-blur-xl p-8 rounded-2xl shadow-xl text-center max-w-sm w-full">
+      <p id="modal-message" class="mb-6 text-lg font-bold text-gray-800"></p>
+      <button id="close-modal" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full transition-colors">閉じる</button>
+    </div>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/mobile-ui.js"></script>
   <script src="../js/event-detail.js"></script>
 </body>
 </html>
