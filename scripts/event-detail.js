@@ -14,8 +14,8 @@ fetch('../data/event/events.json')
     document.getElementById('event-title').textContent = event.title;
     document.getElementById('event-date').textContent = `${event.startDate} ～ ${event.endDate}`;
 
-    // 画像（../../images/ を先頭に付ける）
-    const imagePath = event.image ? `../../${event.image}` : '../../images/event/noimage.png';
+    // 画像（../../assets/images/ を先頭に付ける）
+    const imagePath = event.image ? `../../${event.image}` : '../../assets/images/event/noimage.png';
     document.getElementById('event-image').src = imagePath;
 
     // その他の情報

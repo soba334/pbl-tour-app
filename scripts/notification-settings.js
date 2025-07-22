@@ -1,4 +1,4 @@
-// js/notification-settings.js
+// scripts/notification-settings.js
 document.addEventListener("DOMContentLoaded", () => {
   const notifyEvent = document.getElementById("notifyEvent");
 

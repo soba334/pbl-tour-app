@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="../css/mobile-ui.css">
+  <link rel="stylesheet" href="../styles/mobile-ui.css">
 </head>
 <body class="bg-white flex items-center justify-center min-h-screen">
   <!-- スマホ画面のコンテナ -->
@@ -39,8 +39,9 @@
             <div class="w-20 h-20 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
               <i data-lucide="user" class="w-10 h-10 text-white"></i>
             </div>
-            <h2 class="text-xl font-bold text-gray-800 mb-1">太田一郎</h2>
-            <p class="text-gray-600 text-sm">ichiro.ota@example.com</p>
+            <h2 id="user-name" class="text-xl font-bold text-gray-800 mb-1">ユーザー名</h2>
+            <p id="user-email" class="text-gray-600 text-sm">メールアドレス</p>
+            <span id="user-type" class="inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800"></span>
           </div>
           
           <!-- アクションボタン -->
@@ -111,7 +112,7 @@
           </div>
           
           <!-- ログアウトボタン -->
-          <button class="bg-white/50 backdrop-blur-md border border-red-200 rounded-xl shadow-lg p-4 w-full text-left animate-on-load clickable-button transition-all duration-300 hover:scale-105 hover:shadow-xl" style="animation-delay: 800ms;">
+          <button id="logout-button" class="bg-white/50 backdrop-blur-md border border-red-200 rounded-xl shadow-lg p-4 w-full text-left animate-on-load transition-all duration-300 hover:scale-105 hover:shadow-xl" style="animation-delay: 800ms;">
             <div class="flex items-center justify-center">
               <i data-lucide="log-out" class="w-5 h-5 text-red-500 mr-3"></i>
               <span class="font-medium text-red-500">ログアウト</span>
@@ -130,8 +131,31 @@
     </div>
   </div>
 
-  <script src="../js/utils.js"></script>
-  <script src="../js/mobile-ui.js"></script>
-  <script src="../js/script.js"></script>
+  <!-- 確認モーダル -->
+  <div id="logout-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+    <div class="bg-white/90 backdrop-blur-xl p-8 rounded-2xl shadow-xl text-center max-w-sm w-full">
+      <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="log-out" class="w-8 h-8 text-red-500"></i>
+      </div>
+      <h3 class="text-lg font-bold text-gray-800 mb-2">ログアウトしますか？</h3>
+      <p class="text-gray-600 mb-6">アカウントからログアウトして、ログイン画面に戻ります。</p>
+      <div class="flex space-x-3">
+        <button id="cancel-logout" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-xl transition-colors">
+          キャンセル
+        </button>
+        <button id="confirm-logout" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors">
+          ログアウト
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../config/app.js"></script>
+  <script src="../src/services/api/base.js"></script>
+  <script src="../src/services/auth/auth.js"></script>
+  <script src="../src/services/storage/storage.js"></script>
+  <script src="../src/utils/utils.js"></script>
+  <script src="../src/components/mobile-ui.js"></script>
+  <script src="../scripts/user-profile.js"></script>
 </body>
 </html>

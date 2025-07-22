@@ -9,7 +9,7 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
    <script src="https://unpkg.com/lucide@latest"></script>
-   <link rel="stylesheet" href="../css/mobile-ui.css">
+   <link rel="stylesheet" href="../styles/mobile-ui.css">
 </head>
 <body class="bg-white flex items-center justify-center min-h-screen">
 
@@ -28,8 +28,16 @@
            <div class="p-6 pt-10">
                <!-- ヘッダー -->
                <header class="flex justify-between items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
-                   <h1 class="text-xl font-bold text-gray-800">にいがたび</h1>
-                   <i data-lucide="search" class="text-gray-700 cursor-pointer"></i>
+                   <div>
+                       <h1 class="text-xl font-bold text-gray-800">にいがたび</h1>
+                       <p id="userGreeting" class="text-xs text-gray-600 hidden"></p>
+                   </div>
+                   <div class="flex items-center space-x-3">
+                       <i data-lucide="search" class="text-gray-700 cursor-pointer"></i>
+                       <button id="authButton" class="text-gray-700 cursor-pointer" title="ログイン/プロフィール">
+                           <i data-lucide="user" class="w-5 h-5"></i>
+                       </button>
+                   </div>
                </header>
 
 
@@ -89,10 +97,11 @@
 
 
                    <!-- お知らせと再生ボタン -->
-                   <div class="clickable-button flex items-center justify-between bg-white/50 backdrop-blur-md border border-white/30 p-3 rounded-xl shadow-lg mb-4 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl animate-on-load" style="animation-delay: 800ms;" data-action="navigate" data-url="user-profile.html">
+                   <div class="clickable-button flex items-center justify-between bg-white/50 backdrop-blur-md border border-white/30 p-3 rounded-xl shadow-lg mb-4 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl animate-on-load" style="animation-delay: 800ms;" data-action="navigate" data-url="notifications.html">
                        <div class="flex items-center">
                            <i data-lucide="bell" class="text-emerald-500 mr-3"></i>
-                           <span class="font-bold text-gray-700">お知らせ</span>
+                           <span class="font-bold text-gray-700">通知設定</span>
+                           <span id="notification-badge" class="ml-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full hidden">0</span>
                        </div>
                        <i data-lucide="chevron-right" class="text-gray-400"></i>
                    </div>
@@ -117,6 +126,14 @@
    </div>
 
 
+   <!-- ウェルカムメッセージ -->
+   <div id="welcome-toast" class="fixed top-20 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-6 py-3 rounded-full shadow-lg z-50 hidden animate-pulse">
+       <div class="flex items-center">
+           <i data-lucide="check-circle" class="w-4 h-4 mr-2"></i>
+           <span id="welcome-message"></span>
+       </div>
+   </div>
+
    <!-- メッセージ表示用のモーダル -->
    <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
        <div id="modal-content" class="bg-white/70 backdrop-blur-xl p-8 rounded-2xl shadow-xl text-center max-w-sm w-full">
@@ -126,6 +143,12 @@
    </div>
 
 
-   <script src="../js/mobile-ui.js"></script>
+   <script src="../config/app.js"></script>
+   <script src="../src/services/api/base.js"></script>
+   <script src="../src/services/auth/auth.js"></script>
+   <script src="../src/services/storage/storage.js"></script>
+   <script src="../src/services/notification/notification.js"></script>
+   <script src="../src/components/mobile-ui.js"></script>
+   <script src="../scripts/script.js"></script>
 </body>
 </html>
