@@ -12,14 +12,14 @@ onDOMReady(() => {
 
 // イベントリスナーの初期化
 function initializeEventListeners() {
-    // ナビゲーションボタン
-    const homeBtn = document.getElementById('homeBtn');
-    const spotDetailBtn = document.getElementById('spotDetailBtn');
-    const reservationBtn = document.getElementById('reservationBtn');
-    
-    if (homeBtn) homeBtn.addEventListener('click', () => showPage('home'));
-    if (spotDetailBtn) spotDetailBtn.addEventListener('click', () => showPage('detail'));
-    if (reservationBtn) reservationBtn.addEventListener('click', () => showPage('reservation'));
+    // タブボタン
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const page = e.target.closest('.tab-btn').dataset.page;
+            showPage(page);
+        });
+    });
     
     // スポット選択ボタン
     const spotButtons = document.querySelectorAll('.spot-select-btn');
@@ -75,8 +75,8 @@ function showPage(page) {
 
 // ナビゲーション状態の更新
 function updateNavigation(activePage) {
-    const navButtons = document.querySelectorAll('.nav-btn');
-    navButtons.forEach(btn => {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    tabButtons.forEach(btn => {
         btn.classList.remove('active');
         if (btn.dataset.page === activePage) {
             btn.classList.add('active');

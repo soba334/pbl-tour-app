@@ -1,27 +1,50 @@
 let events = [];
 let selectedDate = null;
-let currentDate = new Date(2024, 2); // 初期は 2024年3月
+let currentDate = new Date(); // 初期は現在の月
 
-// データ読み込み
+// データ読み込みと初期化
 onDOMReady(async () => {
   events = await fetchJSON('../data/event/events.json');
   if (events) {
     renderCalendar();
     renderEvents(); // 初期表示
   }
+  
+  // ナビゲーションボタンの初期化
+  setupNavigationButtons();
+  
+  // 検索機能の初期化
+  setupSearch();
+  
+  // すべてのイベント表示ボタンの初期化
+  setupShowAllButton();
 });
 
-// ナビゲーション
-document.querySelector('.nav-btn.prev').addEventListener('click', () => {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  renderCalendar();
-  renderEvents();
-});
-document.querySelector('.nav-btn.next').addEventListener('click', () => {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  renderCalendar();
-  renderEvents();
-});
+// ナビゲーションボタンの設定
+function setupNavigationButtons() {
+  const prevBtn = document.querySelector('.nav-btn.prev');
+  const nextBtn = document.querySelector('.nav-btn.next');
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+      renderEvents();
+    });
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+      renderEvents();
+    });
+  }
+}
 
 // カレンダー描画
 function renderCalendar() {
@@ -37,9 +60,18 @@ function renderCalendar() {
   const lastDate = new Date(year, month + 1, 0).getDate();
 
   const grid = document.querySelector('.calendar-grid');
-  const weekdayHeader = Array.from(grid.querySelectorAll(':scope > div:nth-child(-n+7)'));
-  grid.innerHTML = '';
-  weekdayHeader.forEach(el => grid.appendChild(el));
+  
+  // 曜日ヘッダー以外の日付セルを削除
+  const dayCells = grid.querySelectorAll('.day-cell');
+  dayCells.forEach(cell => cell.remove());
+  
+  // 空のセルも削除（曜日ヘッダー以外）
+  const emptyCells = Array.from(grid.children).slice(7);
+  emptyCells.forEach(cell => {
+    if (!cell.classList.contains('font-semibold')) {
+      cell.remove();
+    }
+  });
 
   for (let i = 0; i < firstDay; i++) {
     grid.appendChild(document.createElement('div'));
@@ -65,7 +97,9 @@ function renderCalendar() {
       return thisDate >= start && thisDate <= end;
     });
 
-    if (!hasEvent) {
+    if (hasEvent) {
+      dot.style.display = 'block';
+    } else {
       dot.style.display = 'none';
     }
 
@@ -181,16 +215,25 @@ function renderEvents(filterDate = null, showAll = false, keyword = '') {
   }
 }
 
-// 🔍 検索ボタン処理
-document.getElementById('search-button').addEventListener('click', () => {
-  const keyword = document.getElementById('search-input').value.trim();
-  renderEvents(null, true, keyword); // 全イベントを対象にキーワード検索
-});
+// 検索機能の設定
+function setupSearch() {
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const keyword = searchInput.value.trim();
+      renderEvents(null, true, keyword); // 全イベントを対象にキーワード検索
+    });
+  }
+}
 
-// 📋 「すべてのイベントを表示」ボタン処理
-const showAllBtn = document.getElementById('show-all');
-if (showAllBtn) {
-  showAllBtn.addEventListener('click', () => {
-    renderEvents(null, true); // showAll = true
-  });
+// すべてのイベント表示ボタンの設定
+function setupShowAllButton() {
+  const showAllBtn = document.getElementById('show-all');
+  if (showAllBtn) {
+    showAllBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      renderEvents(null, true); // showAll = true
+    });
+  }
 }

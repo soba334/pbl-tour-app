@@ -52,7 +52,12 @@ function initClickableElements() {
     const clickableElements = document.querySelectorAll('.clickable-button');
     
     clickableElements.forEach(el => {
-        el.addEventListener('click', () => {
+        el.addEventListener('click', (e) => {
+            // nav-btnクラスがある場合は処理をスキップ（event_calendar.jsに任せる）
+            if (el.classList.contains('nav-btn')) {
+                return;
+            }
+            
             // ボタンの名前を取得
             const buttonName = el.querySelector('span')?.innerText.trim().replace(/\n/g, '') || 
                               el.innerText.trim().replace(/\n/g, '') ||

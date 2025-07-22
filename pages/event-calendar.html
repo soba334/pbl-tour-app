@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="../css/mobile-ui.css">
+  <link rel="stylesheet" href="../style/event_calendar.css">
 </head>
 <body class="bg-white flex items-center justify-center min-h-screen">
   <!-- スマホ画面のコンテナ -->
@@ -39,11 +40,11 @@
           <!-- カレンダーセクション -->
           <section class="bg-white/50 backdrop-blur-md border border-white/30 rounded-xl shadow-lg p-4 animate-on-load mb-6" style="animation-delay: 200ms;">
             <div class="flex justify-between items-center mb-4">
-              <button class="nav-btn prev clickable-button bg-white/70 p-2 rounded-full hover:bg-white transition-all duration-300 hover:scale-110">
+              <button class="nav-btn prev bg-white/70 p-2 rounded-full hover:bg-white transition-all duration-300 hover:scale-110">
                 <i data-lucide="chevron-left" class="w-5 h-5 text-gray-600"></i>
               </button>
-              <h2 class="month-label text-lg font-bold text-gray-800">2024年 3月</h2>
-              <button class="nav-btn next clickable-button bg-white/70 p-2 rounded-full hover:bg-white transition-all duration-300 hover:scale-110">
+              <h2 class="month-label text-lg font-bold text-gray-800">2025年 7月</h2>
+              <button class="nav-btn next bg-white/70 p-2 rounded-full hover:bg-white transition-all duration-300 hover:scale-110">
                 <i data-lucide="chevron-right" class="w-5 h-5 text-gray-600"></i>
               </button>
             </div>
@@ -67,14 +68,14 @@
           
           <!-- 表示切り替えボタン -->
           <div class="mb-4 animate-on-load" style="animation-delay: 400ms;">
-            <button id="show-all" class="clickable-button w-full flex items-center justify-center bg-white/50 backdrop-blur-md border border-white/30 text-gray-700 font-bold py-4 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+            <button id="show-all" class="w-full flex items-center justify-center bg-white/50 backdrop-blur-md border border-white/30 text-gray-700 font-bold py-4 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
               <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
               すべてのイベントを表示
             </button>
           </div>
           
           <!-- イベント一覧 -->
-          <section id="event-list" class="space-y-3">
+          <section class="event-list space-y-3">
             <!-- JSがここにイベントカードを追加 -->
           </section>
         </main>
@@ -84,6 +85,6 @@
 
   <script src="../js/utils.js"></script>
   <script src="../js/mobile-ui.js"></script>
-  <script src="../js/event-calendar.js"></script>
+  <script src="../js/event_calendar.js"></script>
 </body>
 </html>
