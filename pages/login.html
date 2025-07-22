@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ログイン - にいがたび</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗾</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../styles/mobile-ui.css">
+</head>
+<body class="bg-white flex items-center justify-center min-h-screen">
+  <!-- スマホ画面のコンテナ -->
+  <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+    <div class="w-full h-full overflow-y-auto no-scrollbar">
+      <!-- 背景のグラデーション（アニメーション付き） -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+      
+      <!-- 上部のノッチ（飾り） -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+      
+      <div class="p-6 pt-16">
+        <!-- ヘッダー -->
+        <header class="text-center mb-8 animate-on-load" style="animation-delay: 100ms;">
+          <div class="w-20 h-20 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <i data-lucide="map-pin" class="w-10 h-10 text-emerald-500"></i>
+          </div>
+          <h1 class="text-2xl font-bold text-gray-800 mb-2">にいがたび</h1>
+          <p class="text-gray-600">ログインして新潟の魅力を発見しよう</p>
+        </header>
+        
+        <!-- メインコンテンツ -->
+        <main>
+          <!-- ログインフォーム -->
+          <div class="mobile-card animate-on-load" style="animation-delay: 200ms;">
+            <form id="loginForm" class="space-y-6">
+              <div class="form-group">
+                <label class="form-label flex items-center mb-3">
+                  <i data-lucide="mail" class="w-4 h-4 mr-2 text-emerald-500"></i>
+                  メールアドレス
+                </label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  required 
+                  class="form-input" 
+                  placeholder="user@example.com"
+                  autocomplete="email"
+                >
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label flex items-center mb-3">
+                  <i data-lucide="lock" class="w-4 h-4 mr-2 text-emerald-500"></i>
+                  パスワード
+                </label>
+                <div class="relative">
+                  <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    required 
+                    class="form-input pr-12" 
+                    placeholder="パスワードを入力"
+                    autocomplete="current-password"
+                  >
+                  <button 
+                    type="button" 
+                    id="togglePassword" 
+                    class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  >
+                    <i data-lucide="eye" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between text-sm">
+                <label class="flex items-center">
+                  <input type="checkbox" id="rememberMe" class="mr-2 rounded border-gray-300 text-emerald-500">
+                  <span class="text-gray-600">ログイン状態を保持</span>
+                </label>
+                <a href="#" class="text-emerald-600 hover:text-emerald-700">パスワードを忘れた場合</a>
+              </div>
+              
+              <div class="space-y-3">
+                <button 
+                  type="submit" 
+                  id="loginButton"
+                  class="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                >
+                  <i data-lucide="log-in" class="w-5 h-5 mr-2"></i>
+                  <span>ログイン</span>
+                </button>
+                
+                <button 
+                  type="button" 
+                  id="guestLoginButton"
+                  class="w-full bg-white/70 backdrop-blur-sm border border-gray-200 text-gray-700 font-bold py-4 px-6 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md flex items-center justify-center"
+                >
+                  <i data-lucide="user" class="w-5 h-5 mr-2"></i>
+                  <span>ゲストとして利用</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- 新規登録リンク -->
+          <div class="text-center mt-6 animate-on-load" style="animation-delay: 300ms;">
+            <p class="text-gray-600 mb-4">アカウントをお持ちでない方は</p>
+            <button 
+              id="showRegisterForm"
+              class="text-emerald-600 hover:text-emerald-700 font-bold"
+            >
+              新規アカウント作成
+            </button>
+          </div>
+
+          <!-- 新規登録フォーム（初期は非表示） -->
+          <div id="registerFormContainer" class="mobile-card mt-6 hidden">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="user-plus" class="w-5 h-5 mr-2 text-emerald-500"></i>
+              新規アカウント作成
+            </h3>
+            
+            <form id="registerForm" class="space-y-6">
+              <div class="form-group">
+                <label class="form-label flex items-center mb-3">
+                  <i data-lucide="user" class="w-4 h-4 mr-2 text-emerald-500"></i>
+                  お名前
+                </label>
+                <input 
+                  type="text" 
+                  id="registerName" 
+                  name="name" 
+                  required 
+                  class="form-input" 
+                  placeholder="山田太郎"
+                  autocomplete="name"
+                >
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label flex items-center mb-3">
+                  <i data-lucide="mail" class="w-4 h-4 mr-2 text-emerald-500"></i>
+                  メールアドレス
+                </label>
+                <input 
+                  type="email" 
+                  id="registerEmail" 
+                  name="email" 
+                  required 
+                  class="form-input" 
+                  placeholder="user@example.com"
+                  autocomplete="email"
+                >
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label flex items-center mb-3">
+                  <i data-lucide="lock" class="w-4 h-4 mr-2 text-emerald-500"></i>
+                  パスワード
+                </label>
+                <input 
+                  type="password" 
+                  id="registerPassword" 
+                  name="password" 
+                  required 
+                  class="form-input" 
+                  placeholder="8文字以上のパスワード"
+                  autocomplete="new-password"
+                  minlength="8"
+                >
+              </div>
+              
+              <div class="space-y-3">
+                <button 
+                  type="submit" 
+                  id="registerButton"
+                  class="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                >
+                  <i data-lucide="user-plus" class="w-5 h-5 mr-2"></i>
+                  <span>アカウント作成</span>
+                </button>
+                
+                <button 
+                  type="button" 
+                  id="cancelRegister"
+                  class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-xl transition-colors"
+                >
+                  キャンセル
+                </button>
+              </div>
+            </form>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- ローディングオーバーレイ -->
+  <div id="loadingOverlay" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50">
+    <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl text-center">
+      <div class="animate-spin w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+      <p class="text-gray-700 font-medium">処理中...</p>
+    </div>
+  </div>
+
+  <!-- メッセージ表示用のモーダル -->
+  <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+    <div id="modal-content" class="bg-white/90 backdrop-blur-xl p-8 rounded-2xl shadow-xl text-center max-w-sm w-full">
+      <p id="modal-message" class="mb-6 text-lg font-bold text-gray-800"></p>
+      <button id="close-modal" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full transition-colors">閉じる</button>
+    </div>
+  </div>
+
+  <!-- スクリプト -->
+  <script src="../config/app.js"></script>
+  <script src="../src/services/api/base.js"></script>
+  <script src="../src/services/auth/auth.js"></script>
+  <script src="../src/services/storage/storage.js"></script>
+  <script src="../src/utils/utils.js"></script>
+  <script src="../src/components/mobile-ui.js"></script>
+  <script src="../scripts/login.js" defer></script>
+</body>
+</html>

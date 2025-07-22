@@ -1,8 +1,8 @@
 const brands = [
-  { name: "すべて", icon: "../images/brands/all.png" },
-  { name: "ブランドA", icon: "../images/brands/brand-a.png" },
-  { name: "ブランドB", icon: "../images/brands/brand-b.png" },
-  { name: "ブランドC", icon: "../images/brands/brand-c.png" },
+  { name: "すべて", icon: "../assets/images/brands/all.png" },
+  { name: "ブランドA", icon: "../assets/images/brands/brand-a.png" },
+  { name: "ブランドB", icon: "../assets/images/brands/brand-b.png" },
+  { name: "ブランドC", icon: "../assets/images/brands/brand-c.png" },
 ];
 const brandFilterEl = document.getElementById("brandFilter");
 const couponListEl = document.getElementById("couponList");
@@ -50,7 +50,7 @@ function renderCoupons() {
   renderCards(couponListEl, filteredCoupons, (coupon) => {
     return `
       <div class="coupon-card" onclick="window.location.href='coupon-detail.html?id=${coupons.indexOf(coupon)}'">
-        <img src="${coupon.image}" alt="クーポン画像" onerror="this.src='../images/coupons/default.png'" />
+        <img src="${coupon.image}" alt="クーポン画像" onerror="this.src='../assets/images/coupons/default.png'" />
         <div class="title">${coupon.title}</div>
       </div>
     `;

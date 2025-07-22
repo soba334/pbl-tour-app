@@ -2,7 +2,7 @@
   {
     "title": "割引クーポンA",
     "brand": "ブランドA",
-    "image": "../images/coupons/coupon1.png",
+    "image": "../assets/images/coupons/coupon1.png",
     "code": "2106540003702",
     "notes": [
       "このクーポンは1回限り使用できます。",
@@ -13,7 +13,7 @@
   {
     "title": "無料クーポンB",
     "brand": "ブランドB",
-    "image": "../images/coupons/coupon2.png",
+    "image": "../assets/images/coupons/coupon2.png",
     "code": "2106540003703",
     "notes": [
       "本クーポンはドリンクにのみ使用可能です。",
@@ -24,7 +24,7 @@
   {
     "title": "限定クーポンC",
     "brand": "ブランドC",
-    "image": "../images/coupons/coupon3.png",
+    "image": "../assets/images/coupons/coupon3.png",
     "code": "2106540003704",
     "notes": [
       "このクーポンは特定の店舗でのみご利用いただけます。",
@@ -35,7 +35,7 @@
   {
     "title": "割引クーポンD",
     "brand": "ブランドA",
-    "image": "../images/coupons/coupon4.png",
+    "image": "../assets/images/coupons/coupon4.png",
     "code": "2106540003705",
     "notes": [
       "税込1,000円以上のご購入でご利用可能です。",

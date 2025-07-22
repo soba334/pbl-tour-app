@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>通知設定 - にいがたび</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔔</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../styles/mobile-ui.css">
+</head>
+<body class="bg-white flex items-center justify-center min-h-screen">
+  <!-- スマホ画面のコンテナ -->
+  <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+    <div class="w-full h-full overflow-y-auto no-scrollbar">
+      <!-- 背景のグラデーション -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+      
+      <!-- 上部のノッチ -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+      
+      <div class="p-6 pt-16">
+        <!-- ヘッダー -->
+        <header class="flex items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
+          <button onclick="history.back()" class="mr-4 p-2 text-gray-700 hover:text-gray-900">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">通知設定</h1>
+            <p class="text-sm text-gray-600">通知の管理と設定</p>
+          </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main>
+          <!-- 通知許可状態 -->
+          <div class="mobile-card mb-4 animate-on-load" style="animation-delay: 200ms;">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div id="permission-icon" class="w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                  <i data-lucide="bell" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-800">通知許可</h3>
+                  <p id="permission-status" class="text-sm text-gray-600">確認中...</p>
+                </div>
+              </div>
+              <button id="request-permission" class="hidden bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm">
+                許可する
+              </button>
+            </div>
+          </div>
+
+          <!-- 通知設定 -->
+          <div class="mobile-card mb-4 animate-on-load" style="animation-delay: 300ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="settings" class="w-5 h-5 mr-2 text-emerald-500"></i>
+              通知設定
+            </h3>
+            
+            <div class="space-y-4">
+              <!-- 通知有効/無効 -->
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="font-medium text-gray-700">通知を受け取る</label>
+                  <p class="text-sm text-gray-500">新着情報やイベント通知</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="notifications-enabled">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <!-- サウンド -->
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="font-medium text-gray-700">サウンド</label>
+                  <p class="text-sm text-gray-500">通知音を再生</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="notification-sound">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <!-- バイブレーション -->
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="font-medium text-gray-700">バイブレーション</label>
+                  <p class="text-sm text-gray-500">デバイスを振動させる</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="notification-vibration">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <!-- アプリ内通知 -->
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="font-medium text-gray-700">アプリ内通知</label>
+                  <p class="text-sm text-gray-500">アプリ使用中の通知表示</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="notification-inapp">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 通知カテゴリー -->
+          <div class="mobile-card mb-4 animate-on-load" style="animation-delay: 400ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="tag" class="w-5 h-5 mr-2 text-emerald-500"></i>
+              通知カテゴリー
+            </h3>
+            
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="font-medium text-gray-700">イベント情報</label>
+                  <p class="text-sm text-gray-500">新しいイベントの通知</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="notify-events" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="font-medium text-gray-700">予約リマインダー</label>
+                  <p class="text-sm text-gray-500">予約日時の事前通知</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="notify-reservations" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="font-medium text-gray-700">クーポン情報</label>
+                  <p class="text-sm text-gray-500">お得なクーポンの配信</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="notify-coupons" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="font-medium text-gray-700">おすすめ情報</label>
+                  <p class="text-sm text-gray-500">パーソナライズされたおすすめ</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="notify-recommendations">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 通知履歴 -->
+          <div class="mobile-card mb-4 animate-on-load" style="animation-delay: 500ms;">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-gray-800 flex items-center">
+                <i data-lucide="history" class="w-5 h-5 mr-2 text-emerald-500"></i>
+                通知履歴
+                <span id="unread-count" class="ml-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full hidden">0</span>
+              </h3>
+              <button id="mark-all-read" class="text-emerald-600 hover:text-emerald-700 text-sm">
+                すべて既読
+              </button>
+            </div>
+
+            <div id="notification-history" class="space-y-3 max-h-60 overflow-y-auto">
+              <p class="text-center text-gray-500 text-sm py-4">通知履歴がありません</p>
+            </div>
+          </div>
+
+          <!-- テスト通知 -->
+          <div class="mobile-card mb-4 animate-on-load" style="animation-delay: 600ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="test-tube" class="w-5 h-5 mr-2 text-emerald-500"></i>
+              テスト
+            </h3>
+            
+            <div class="space-y-3">
+              <button id="test-notification" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition-colors">
+                テスト通知を送信
+              </button>
+              
+              <button id="test-scheduled" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-xl transition-colors">
+                5秒後に通知（スケジュール）
+              </button>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- スクリプト -->
+  <script src="../config/app.js"></script>
+  <script src="../src/services/storage/storage.js"></script>
+  <script src="../src/services/notification/notification.js"></script>
+  <script src="../src/utils/utils.js"></script>
+  <script src="../src/components/mobile-ui.js"></script>
+  <script src="../scripts/notifications.js" defer></script>
+</body>
+</html>
