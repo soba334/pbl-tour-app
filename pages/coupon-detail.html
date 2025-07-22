@@ -4,42 +4,96 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>クーポン詳細</title>
-  <link rel="stylesheet" href="../style/coupon-detail.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../css/mobile-ui.css">
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
-<body>
-  <div class="container">
-    <!-- 統一感のある戻るボタン -->
-    <div class="back-button-box">
-      <a href="coupon-list.html" class="back-button">← クーポン一覧へ戻る</a>
-    </div>
+<body class="bg-white flex items-center justify-center min-h-screen">
+  <!-- スマホ画面のコンテナ -->
+  <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+    <div class="w-full h-full overflow-y-auto no-scrollbar">
+      <!-- 背景のグラデーション（アニメーション付き） -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+      
+      <!-- 上部のノッチ（飾り） -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+      
+      <div class="p-6 pt-10">
+        <!-- ヘッダー -->
+        <header class="flex justify-between items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
+          <div class="back-button flex items-center text-gray-700 cursor-pointer clickable-button" data-action="navigate" data-url="coupon-list.html">
+            <i data-lucide="arrow-left" class="mr-2"></i>
+            <span class="font-medium">クーポン一覧</span>
+          </div>
+          <h1 class="text-xl font-bold text-gray-800">クーポン詳細</h1>
+          <i data-lucide="share" class="text-gray-700 cursor-pointer clickable-button"></i>
+        </header>
+        
+        <!-- メインコンテンツ -->
+        <main>
+          <!-- クーポン画像とタイトル -->
+          <div class="animate-on-load mb-6" style="animation-delay: 200ms;">
+            <div class="bg-white/50 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg overflow-hidden">
+              <img id="couponImage" class="w-full h-48 object-cover" src="" alt="クーポン画像" />
+              <div class="p-4">
+                <h2 id="couponTitle" class="text-lg font-bold text-gray-800">クーポン名</h2>
+              </div>
+            </div>
+          </div>
 
-    <div class="image-box">
-      <img id="couponImage" class="coupon-img" src="" alt="クーポン画像" />
-      <div id="couponTitle" class="title">クーポン名</div>
-    </div>
+          <!-- スワイプコンテナ -->
+          <div class="animate-on-load mb-6" style="animation-delay: 300ms;">
+            <div class="bg-white/50 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg p-6" id="swipeContainer">
+              <div id="swipeWrapper">
+                <!-- 使用ボタン -->
+                <div id="slideUse" class="text-center mb-4">
+                  <button id="useButton" class="w-full flex items-center justify-center bg-emerald-400/80 backdrop-blur-md text-white font-bold py-4 rounded-xl shadow-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                    <i data-lucide="ticket" class="w-5 h-5 mr-2"></i>
+                    使用する
+                  </button>
+                </div>
+                <!-- バーコード -->
+                <div id="slideBarcode" class="text-center">
+                  <div class="bg-white p-4 rounded-xl">
+                    <svg id="barcode" class="mx-auto"></svg>
+                    <div id="codeText" class="mt-2 text-sm text-gray-600">読み込み中...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <!-- ✅ スワイプコンテナ -->
-    <div class="swipe-container use-bg" id="swipeContainer">
-      <div class="swipe-wrapper" id="swipeWrapper">
-        <!-- 使用ボタン -->
-        <div class="swipe-slide" id="slideUse">
-          <button class="use-button" id="useButton">使用する</button>
-        </div>
-        <!-- バーコード -->
-        <div class="swipe-slide" id="slideBarcode">
-          <svg id="barcode"></svg>
-          <div class="code" id="codeText">読み込み中...</div>
-        </div>
+          <!-- 注意事項 -->
+          <div class="animate-on-load" style="animation-delay: 400ms;">
+            <div class="bg-white/50 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg p-6">
+              <h3 class="font-bold text-gray-800 mb-3 flex items-center">
+                <i data-lucide="info" class="w-5 h-5 text-blue-500 mr-2"></i>
+                ご利用上の注意
+              </h3>
+              <div id="couponNotes" class="text-sm text-gray-700">
+                <!-- JSで挿入されます -->
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
-    </div>
-
-    <!-- ✅ 注意事項 -->
-    <div class="notes" id="couponNotes">
-      <!-- JSで挿入されます -->
     </div>
   </div>
 
+  <!-- メッセージ表示用のモーダル -->
+  <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+    <div id="modal-content" class="bg-white/70 backdrop-blur-xl p-8 rounded-2xl shadow-xl text-center max-w-sm w-full">
+      <p id="modal-message" class="mb-6 text-lg font-bold text-gray-800"></p>
+      <button id="close-modal" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full transition-colors">閉じる</button>
+    </div>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/mobile-ui.js"></script>
   <script src="../js/coupon-detail.js"></script>
 </body>
 </html>

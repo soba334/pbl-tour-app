@@ -4,31 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>保存済みスポット一覧</title>
-  <link rel="stylesheet" href="../style/saved-spot.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../css/mobile-ui.css">
 </head>
-<body>
-  <div class="container">
-
-    <!-- 🔍 検索バー -->
-    <input type="text" id="searchBar" placeholder="検索" />
-
-    <!-- 🧭 カテゴリタブ -->
-    <div class="category-tabs">
-      <button class="tab active" data-category="all">すべて</button>
-      <button class="tab" data-category="favorite">お気に入り</button>
-      <button class="tab" data-category="観光地">観光地</button>
-      <button class="tab" data-category="カフェ">カフェ</button>
-      <button class="tab" data-category="レストラン">レストラン</button>
+<body class="bg-white flex items-center justify-center min-h-screen">
+  <!-- スマホ画面のコンテナ -->
+  <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+    <div class="w-full h-full overflow-y-auto no-scrollbar">
+      <!-- 背景のグラデーション（アニメーション付き） -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+      
+      <!-- 上部のノッチ（飾り） -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+      
+      <div class="p-6 pt-10">
+        <!-- ヘッダー -->
+        <header class="flex justify-between items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
+          <div class="back-button flex items-center text-gray-700 cursor-pointer clickable-button" data-action="navigate" data-url="index.html">
+            <i data-lucide="arrow-left" class="mr-2"></i>
+            <span class="font-medium">ホーム</span>
+          </div>
+          <h1 class="text-xl font-bold text-gray-800">保存済みスポット</h1>
+          <i data-lucide="search" class="text-gray-700 cursor-pointer"></i>
+        </header>
+        
+        <!-- メインコンテンツ -->
+        <main>
+          <!-- 検索バー -->
+          <div class="relative mb-6 animate-on-load" style="animation-delay: 200ms;">
+            <input type="text" id="searchBar" placeholder="スポットを検索" class="w-full py-3 pl-4 pr-10 bg-white/50 backdrop-blur-md border border-white/30 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            <i data-lucide="search" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+          </div>
+          
+          <!-- カテゴリタブ -->
+          <div class="flex space-x-2 mb-6 animate-on-load" style="animation-delay: 300ms;">
+            <button class="mobile-tab clickable-button px-4 py-2 bg-emerald-400/80 backdrop-blur-md text-white rounded-full text-sm font-bold transition-all duration-300 hover:scale-105 active" data-category="all">すべて</button>
+            <button class="mobile-tab clickable-button px-4 py-2 bg-white/50 backdrop-blur-md text-gray-700 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105" data-category="favorite">お気に入り</button>
+            <button class="mobile-tab clickable-button px-4 py-2 bg-white/50 backdrop-blur-md text-gray-700 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105" data-category="観光地">観光地</button>
+            <button class="mobile-tab clickable-button px-4 py-2 bg-white/50 backdrop-blur-md text-gray-700 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105" data-category="カフェ">カフェ</button>
+            <button class="mobile-tab clickable-button px-4 py-2 bg-white/50 backdrop-blur-md text-gray-700 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105" data-category="レストラン">レストラン</button>
+          </div>
+          
+          <!-- スポットリスト -->
+          <div id="spotList" class="space-y-3">
+            <!-- JavaScriptでスポットカードが挿入されます -->
+          </div>
+        </main>
+      </div>
     </div>
-
-    <!-- 📄 スポットカード表示エリア -->
-    <div id="spotList" class="spot-list">
-      <!-- JavaScriptでスポットカードが挿入されます -->
-    </div>
-
   </div>
 
   <!-- 📜 スクリプト -->
+  <script src="../js/utils.js"></script>
+  <script src="../js/mobile-ui.js"></script>
   <script src="../js/saved-spot.js" defer></script>
 </body>
 </html>

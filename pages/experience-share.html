@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>体験をシェア</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../css/mobile-ui.css">
+</head>
+<body class="bg-white flex items-center justify-center min-h-screen">
+  <!-- スマホ画面のコンテナ -->
+  <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+    <div class="w-full h-full overflow-y-auto no-scrollbar">
+      <!-- 背景のグラデーション（アニメーション付き） -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+      
+      <!-- 上部のノッチ（飾り） -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+      
+      <div class="p-6 pt-10">
+        <!-- ヘッダー -->
+        <header class="flex justify-between items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
+          <div class="back-button flex items-center text-gray-700 cursor-pointer clickable-button" data-action="navigate" data-url="index.html">
+            <i data-lucide="arrow-left" class="mr-2"></i>
+            <span class="font-medium">ホーム</span>
+          </div>
+          <h1 class="text-xl font-bold text-gray-800">体験をシェア</h1>
+          <i data-lucide="settings" class="text-gray-700 cursor-pointer clickable-button"></i>
+        </header>
+        
+        <!-- メインコンテンツ -->
+        <main>
+          <!-- 画像アップロードセクション -->
+          <section class="mobile-card animate-on-load delay-200 mb-6">
+            <div id="imagePreview" class="text-center p-8 bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 cursor-pointer hover:bg-gray-100 transition-colors">
+              <i data-lucide="camera" class="w-12 h-12 text-gray-400 mx-auto mb-2"></i>
+              <p class="text-gray-600">📷 写真をアップロード</p>
+            </div>
+            <input type="file" id="imageInput" accept="image/*" class="hidden">
+            
+            <div class="flex gap-3 mt-4">
+              <button id="cameraBtn" class="mobile-button-secondary flex-1 text-sm">
+                <i data-lucide="camera" class="w-4 h-4 mr-2"></i>
+                カメラで撮影
+              </button>
+              <button id="galleryBtn" class="mobile-button-secondary flex-1 text-sm">
+                <i data-lucide="image" class="w-4 h-4 mr-2"></i>
+                ギャラリーから選ぶ
+              </button>
+            </div>
+          </section>
+
+          <!-- コメント入力セクション -->
+          <section class="mobile-card animate-on-load delay-300 mb-6">
+            <h3 class="font-bold text-gray-800 mb-3 flex items-center">
+              <i data-lucide="message-circle" class="w-5 h-5 text-blue-500 mr-2"></i>
+              体験をシェアしよう！
+            </h3>
+            <textarea 
+              id="commentInput" 
+              class="w-full p-3 bg-white/70 border border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-emerald-400" 
+              placeholder="どんな体験をしましたか？感想を聞かせてください..."
+              rows="4"
+            ></textarea>
+          </section>
+
+          <!-- 推奨タグセクション -->
+          <section class="mobile-card animate-on-load delay-400 mb-6">
+            <h3 class="font-bold text-gray-800 mb-3 flex items-center">
+              <i data-lucide="tags" class="w-5 h-5 text-yellow-500 mr-2"></i>
+              おすすめタグ
+            </h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <button class="tag-button px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald-100 hover:text-emerald-700 transition-colors">#新潟</button>
+              <button class="tag-button px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald-100 hover:text-emerald-700 transition-colors">#観光</button>
+              <button class="tag-button px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald-100 hover:text-emerald-700 transition-colors">#グルメ</button>
+              <button class="tag-button px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald-100 hover:text-emerald-700 transition-colors">#カフェ</button>
+              <button class="tag-button px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald-100 hover:text-emerald-700 transition-colors">#アート</button>
+              <button class="tag-button px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald-100 hover:text-emerald-700 transition-colors">#自然</button>
+              <button class="tag-button px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald-100 hover:text-emerald-700 transition-colors">#イベント</button>
+              <button class="tag-button px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald-100 hover:text-emerald-700 transition-colors">#フォトスポット</button>
+            </div>
+            
+            <!-- 選択されたタグの表示 -->
+            <div id="selectedTags"></div>
+          </section>
+
+          <!-- SNS連携設定 -->
+          <section class="mobile-card animate-on-load delay-500 mb-6">
+            <h3 class="font-bold text-gray-800 mb-3 flex items-center">
+              <i data-lucide="share-2" class="w-5 h-5 text-purple-500 mr-2"></i>
+              SNS連携
+            </h3>
+            <div class="space-y-3">
+              <label class="flex items-center">
+                <input type="checkbox" class="sns-checkbox mr-3 rounded" data-sns="twitter">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-blue-400 rounded mr-2 flex items-center justify-center">
+                    <span class="text-white text-xs font-bold">T</span>
+                  </div>
+                  <span class="text-gray-700">Twitterに投稿</span>
+                </div>
+              </label>
+              
+              <label class="flex items-center">
+                <input type="checkbox" class="sns-checkbox mr-3 rounded" data-sns="instagram">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded mr-2 flex items-center justify-center">
+                    <span class="text-white text-xs font-bold">I</span>
+                  </div>
+                  <span class="text-gray-700">Instagramに投稿</span>
+                </div>
+              </label>
+              
+              <label class="flex items-center">
+                <input type="checkbox" class="sns-checkbox mr-3 rounded" data-sns="facebook">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-blue-600 rounded mr-2 flex items-center justify-center">
+                    <span class="text-white text-xs font-bold">F</span>
+                  </div>
+                  <span class="text-gray-700">Facebookに投稿</span>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <!-- 投稿ボタン -->
+          <div class="animate-on-load delay-600">
+            <button id="postBtn" class="mobile-button-primary w-full text-lg py-4">
+              <i data-lucide="send" class="w-5 h-5 mr-2"></i>
+              体験をシェアする
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- メッセージ表示用のモーダル -->
+  <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+    <div id="modal-content" class="bg-white/70 backdrop-blur-xl p-8 rounded-2xl shadow-xl text-center max-w-sm w-full">
+      <p id="modal-message" class="mb-6 text-lg font-bold text-gray-800"></p>
+      <button id="close-modal" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full transition-colors">閉じる</button>
+    </div>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/mobile-ui.js"></script>
+  <script src="../js/experience-share.js"></script>
+</body>
+</html>
