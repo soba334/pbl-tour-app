@@ -1,77 +1,197 @@
-# PBL Tour App
+# 🗾 にいがたび (Niigatatabi)
 
-Z世代向けのスマート観光支援Webアプリです。  
-保存スポット一覧・イベントカレンダー・クーポン・通知設定などの機能を通じて、若者が「また行きたくなる」体験をデザインします。
+Z世代向けの新潟市観光支援Webアプリです。  
+スポット検索・イベント情報・クーポン・SNS投稿機能を通じて、若者が「また行きたくなる」体験をデザインします。
+
+---
+
+## 📱 アプリの特徴
+
+- **完全モバイル対応**: スマートフォンに最適化された直感的なUI/UX
+- **統一されたナビゲーション**: 全ページで一貫した操作性
+- **リアルタイム検索**: キーワード・カテゴリー検索機能
+- **パーソナライゼーション**: 興味・関心に基づくカスタマイズ
+- **オフライン対応**: ローカルストレージによるデータ永続化
 
 ---
 
 ## 📁 プロジェクト構成
 
+```
 .
-├── pages/ # 各機能ごとのHTMLページ群
-├── styles/ # ページごとのCSS
-├── scripts/ # ページごとのJSロジック
-├── src/ # サービス層・コンポーネント・ユーティリティ
-├── config/ # アプリケーション設定
-├── data/ # JSON形式のデータ（クーポン・イベント・スポット）
-└── assets/ # 画像素材・フォント・アイコン
+├── pages/                     # 各機能のHTMLページ
+│   ├── index.html            # ホーム画面
+│   ├── login.html            # ログイン・新規登録
+│   ├── search.html           # 検索機能 [NEW]
+│   ├── user-profile.html     # マイページ
+│   ├── profile-edit.html     # プロフィール編集 [NEW]
+│   ├── settings.html         # アプリ設定 [NEW]
+│   ├── help.html            # ヘルプ・FAQ [NEW]
+│   ├── interests-edit.html   # 興味・関心編集 [NEW]
+│   ├── event-calendar.html   # イベントカレンダー
+│   ├── event-detail.html     # イベント詳細
+│   ├── saved-spot-list.html  # 保存済みスポット一覧
+│   ├── saved-spot-detail.html # スポット詳細
+│   ├── spot-reservation.html # スポット予約
+│   ├── coupon-list.html      # クーポン一覧
+│   ├── coupon-detail.html    # クーポン詳細
+│   ├── experience-share.html # 体験投稿
+│   ├── notifications.html    # 通知一覧
+│   └── notification-settings.html # 通知設定
+├── scripts/                  # ページ固有のJavaScript
+│   ├── interests-edit.js     # [NEW] 興味・関心編集機能
+│   ├── search.js            # [NEW] 検索機能
+│   ├── profile-edit.js      # [NEW] プロフィール編集機能
+│   ├── settings.js          # [NEW] 設定管理機能
+│   ├── help.js              # [NEW] ヘルプ・FAQ機能
+│   └── ...                  # その他既存のスクリプト
+├── src/                      # コア機能とサービス
+│   ├── components/
+│   │   └── mobile-ui.js     # [UPDATED] モバイルUI共通機能
+│   ├── services/            # API・認証・ストレージサービス
+│   └── utils/               # ユーティリティ関数
+├── styles/                   # CSS・スタイルシート
+├── config/                   # アプリケーション設定
+├── data/                     # JSONデータ（イベント・スポット・クーポン）
+├── assets/                   # 画像・フォント・アイコン
+├── test-navigation.html      # [NEW] ナビゲーションテスト用
+└── test-navigation-debug.html # [NEW] デバッグ用テストページ
+```
 
 ---
 
-## 🧩 主な画面と機能
+## 🎯 主な機能
 
-### 🗺️ 保存スポット一覧ページ（`pages/saved-spot-list.html`）
-- 検索バー・カテゴリタブによるフィルタ
-- お気に入りハートボタン（トグル）
-- JSONデータ：`data/spots/saved_spots.json`
+### 🏠 ホーム画面 (`index.html`)
+- **検索機能**: キーワード・カテゴリー検索
+- **クイックアクセス**: スポット・予約・投稿・お気に入り・SNS投稿
+- **イベント・クーポンボタン**: 各機能への直接アクセス
+- **通知設定**: プッシュ通知の管理
 
-### 📅 イベントカレンダー（`pages/event-calendar.html`）
-- カレンダーでイベントを月ごとに表示
-- イベントカードの一覧表示と検索機能
-- 「通知設定 ⚙️」ボタンから通知画面へ遷移
+### 🔍 検索機能 (`search.html`) [NEW]
+- **リアルタイム検索**: 入力中の動的検索
+- **人気キーワード**: よく検索されるキーワード表示
+- **カテゴリー検索**: 観光・グルメ・イベント等のカテゴリー別検索
+- **検索履歴**: 過去の検索キーワード保存
 
-### 🛎️ 通知設定ページ（`pages/notification-settings.html`）
-- トグルUIで通知ON/OFFを制御
-- 「イベントのお知らせ」をOFFにすると、季節イベントトグルも全てOFFになる仕様
-- 戻るボタンでカレンダー画面へ戻れる
+### 👤 ユーザー管理
+- **マイページ** (`user-profile.html`): プロフィール表示・設定アクセス
+- **プロフィール編集** (`profile-edit.html`) [NEW]: 基本情報・興味関心の編集
+- **設定** (`settings.html`) [NEW]: アプリ設定・通知・プライバシー設定
+- **興味・関心編集** (`interests-edit.html`) [NEW]: パーソナライズ設定
 
-### 🎫 クーポン一覧／詳細（`pages/coupon-list.html`, `coupon-detail.html`）
-- ブランドフィルタと検索機能
-- バーコード表示機能あり（`JsBarcode`使用）
+### 📅 イベント機能
+- **イベントカレンダー** (`event-calendar.html`): 月間カレンダー表示
+- **イベント詳細** (`event-detail.html`): 詳細情報・地図・予約リンク
+- **通知設定** (`notification-settings.html`): イベント通知のカスタマイズ
 
-### ✍️ 体験投稿ページ（`pages/experience-share.html`）
-- 写真アップロード・コメント・タグ付け・SNS連携UIあり
+### 📍 スポット機能
+- **スポット一覧** (`saved-spot-list.html`): お気に入りスポット管理
+- **スポット詳細** (`saved-spot-detail.html`): 詳細情報・口コミ・写真
+- **スポット予約** (`spot-reservation.html`): 3ステップ予約フロー
+
+### 🎫 クーポン機能
+- **クーポン一覧** (`coupon-list.html`): ブランド別フィルタ・検索
+- **クーポン詳細** (`coupon-detail.html`): バーコード表示・利用条件
+
+### 📸 体験投稿 (`experience-share.html`)
+- **写真投稿**: カメラ・ギャラリーからの画像アップロード
+- **タグ機能**: おすすめタグ・カスタムタグ
+- **SNS連携**: Twitter・Instagram・Facebook連携
+
+### ❓ サポート機能
+- **ヘルプ** (`help.html`) [NEW]: FAQ・お問い合わせ・利用ガイド
+- **通知** (`notifications.html`): 通知履歴・既読管理
 
 ---
 
-## 🧠 使用技術
+## 🛠️ 技術スタック
 
-- HTML5 / CSS3 / JavaScript（Vanilla）
-- 外部ライブラリ:
-  - [ScrollReveal.js](https://scrollrevealjs.org/)（アニメーション）
-  - [JsBarcode](https://github.com/lindell/JsBarcode)（バーコード表示）
-  - [TailwindCSS CDN](https://tailwindcss.com/)（一部ページ）
-- JSONデータによる構造化管理（`/data/` 配下）
+### フロントエンド
+- **HTML5** / **CSS3** / **JavaScript (ES6+)**
+- **TailwindCSS**: ユーティリティファーストCSS
+- **Lucide Icons**: アイコンライブラリ
+- **Google Fonts**: M PLUS Rounded 1c フォント
+
+### 外部ライブラリ
+- **JsBarcode**: バーコード生成ライブラリ
+- **ScrollReveal.js**: スクロールアニメーション
+- **Web APIs**: LocalStorage・Notification API・File API
+
+### データ管理
+- **JSON形式**: 構造化データ管理 (`/data/`配下)
+- **LocalStorage**: クライアントサイドデータ永続化
+- **Session Storage**: 一時的なデータ保存
 
 ---
 
-## 📝 今後の拡張アイデア
+## 🔧 最新の改善点 (v2.0)
 
-- 各種トグル状態の `localStorage` 保存・復元
-- FirestoreやSupabase等との連携（予約、クーポン使用状況保存）
-- Service Workerによるオフライン対応
-- アクセシビリティ対応（WAI-ARIA）
+### ✅ 完了した機能追加・修正
+- **全ページナビゲーション統一**: すべてのボタンで適切な画面遷移を実装
+- **新規ページ5つ追加**: 検索・設定・ヘルプ・プロフィール編集・興味関心編集
+- **JavaScriptファイル完全実装**: 各新規ページの機能を完全実装
+- **モバイルUI修正**: ナビゲーション処理のバグ修正
+- **データ永続化**: ローカルストレージによる設定・プロフィール保存
+- **テスト環境構築**: ナビゲーションテスト・デバッグページ追加
+
+### 🆕 新機能
+- **リアルタイム検索**: 入力に応じた動的検索結果表示
+- **設定のインポート/エクスポート**: ユーザーデータのバックアップ機能
+- **FAQ検索**: ヘルプページでの質問検索機能
+- **興味・関心カスタマイズ**: パーソナライズされた推奨機能
+- **フォームバリデーション**: 入力内容の検証機能
 
 ---
 
-## 🧑‍💻 開発メンバー（仮）
+## 🚀 開発・デプロイ
 
-- 真庭詩音（）
-- 林楓太（）
-- 粕川陽夏琉（）
-- 黛拓駿（）
-- 佐藤昊（）
-- 大井隼（）
-（後で各担当ページ記載）
+### ローカル開発
+```bash
+# プロジェクトクローン
+git clone <repository-url>
+cd pbl-tour-app
 
+# ローカルサーバー起動 (例: Live Server)
+# http://localhost:5500/pages/index.html でアクセス
+```
 
+### テスト
+```bash
+# ナビゲーションテスト
+open test-navigation.html
+
+# デバッグテスト
+open test-navigation-debug.html
+```
+
+### ブランチ構成
+- `main`: 本番環境用
+- `feature/unify-ui-and-navigation`: UI統一・ナビゲーション改善 (現在のブランチ)
+
+---
+
+## 📝 今後の開発予定
+
+### Phase 3 (次期リリース)
+- [ ] **PWA対応**: Service Worker・マニフェスト実装
+- [ ] **アクセシビリティ向上**: WAI-ARIA・キーボードナビゲーション
+- [ ] **パフォーマンス最適化**: 画像遅延読み込み・コード分割
+- [ ] **多言語対応**: 英語・中国語・韓国語サポート
+
+### Phase 4 (長期)
+- [ ] **バックエンド連携**: Firebase・Supabase等との統合
+- [ ] **リアルタイム機能**: WebSocket通信・ライブ更新
+- [ ] **AI機能**: 推奨アルゴリズム・チャットボット
+- [ ] **ソーシャル機能**: ユーザー間のフォロー・レビュー
+
+---
+
+## 📄 ライセンス
+
+本プロジェクトは学習目的で開発されています。  
+
+---
+
+**最終更新**: 2025年7月23日  
+**バージョン**: v2.0 - ナビゲーション統一・新機能追加版
