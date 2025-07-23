@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ナビゲーションテスト - にいがたび</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .test-link {
+            display: block;
+            padding: 12px;
+            margin: 8px 0;
+            background: #f0f9ff;
+            border: 1px solid #0284c7;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #0369a1;
+            transition: background-color 0.2s;
+        }
+        .test-link:hover {
+            background: #e0f2fe;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">🧪 ナビゲーションテスト</h1>
+        <p class="text-gray-600 mb-8">すべてのページリンクの動作確認用テストページです。</p>
+        
+        <div class="test-section">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📱 メインページ</h2>
+            <a href="pages/index.html" class="test-link">🏠 ホーム (index.html)</a>
+            <a href="pages/login.html" class="test-link">🔐 ログイン (login.html)</a>
+        </div>
+
+        <div class="test-section">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">🎯 新規作成ページ</h2>
+            <a href="pages/search.html" class="test-link">🔍 検索 (search.html)</a>
+            <a href="pages/profile-edit.html" class="test-link">✏️ プロフィール編集 (profile-edit.html)</a>
+            <a href="pages/settings.html" class="test-link">⚙️ 設定 (settings.html)</a>
+            <a href="pages/help.html" class="test-link">❓ ヘルプ (help.html)</a>
+            <a href="pages/interests-edit.html" class="test-link">❤️ 興味・関心編集 (interests-edit.html)</a>
+        </div>
+
+        <div class="test-section">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📋 既存ページ</h2>
+            <a href="pages/user-profile.html" class="test-link">👤 マイページ (user-profile.html)</a>
+            <a href="pages/event-calendar.html" class="test-link">📅 イベントカレンダー (event-calendar.html)</a>
+            <a href="pages/coupon-list.html" class="test-link">🎫 クーポン一覧 (coupon-list.html)</a>
+            <a href="pages/coupon-detail.html" class="test-link">🎫 クーポン詳細 (coupon-detail.html)</a>
+            <a href="pages/experience-share.html" class="test-link">📸 体験シェア (experience-share.html)</a>
+            <a href="pages/saved-spot-list.html" class="test-link">📍 保存済みスポット一覧 (saved-spot-list.html)</a>
+            <a href="pages/saved-spot-detail.html" class="test-link">📍 スポット詳細 (saved-spot-detail.html)</a>
+            <a href="pages/spot-reservation.html" class="test-link">📅 スポット予約 (spot-reservation.html)</a>
+            <a href="pages/event-detail.html" class="test-link">🎉 イベント詳細 (event-detail.html)</a>
+            <a href="pages/notifications.html" class="test-link">🔔 通知 (notifications.html)</a>
+            <a href="pages/notification-settings.html" class="test-link">⚙️ 通知設定 (notification-settings.html)</a>
+        </div>
+
+        <div class="test-section">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">✅ 確認項目</h2>
+            <div class="space-y-2">
+                <div class="flex items-center">
+                    <input type="checkbox" id="check1" class="mr-2">
+                    <label for="check1">すべてのページが正常に読み込まれる</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="check2" class="mr-2">
+                    <label for="check2">ナビゲーションボタンが正しく動作する</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="check3" class="mr-2">
+                    <label for="check3">JavaScriptエラーが発生しない</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="check4" class="mr-2">
+                    <label for="check4">スタイルが正しく適用される</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="check5" class="mr-2">
+                    <label for="check5">モバイル表示が適切</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <h3 class="font-bold text-blue-800 mb-2">📝 テスト手順</h3>
+            <ol class="list-decimal list-inside text-blue-700 space-y-1">
+                <li>各ページリンクをクリックして動作確認</li>
+                <li>ページ内のナビゲーションボタンをテスト</li>
+                <li>ブラウザのデベロッパーツールでエラーを確認</li>
+                <li>モバイル表示モードでの確認</li>
+                <li>すべての機能が正常に動作することを確認</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // ページ読み込み完了時の処理
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ テストページが正常に読み込まれました');
+            
+            // チェックボックスの状態を保存
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    localStorage.setItem(this.id, this.checked);
+                });
+                
+                // 保存された状態を復元
+                const saved = localStorage.getItem(checkbox.id);
+                if (saved !== null) {
+                    checkbox.checked = saved === 'true';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
