@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>検索 - にいがたび</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../styles/mobile-ui.css">
+</head>
+<body class="bg-white flex items-center justify-center min-h-screen">
+  <!-- スマホ画面のコンテナ -->
+  <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+    <div class="w-full h-full overflow-y-auto no-scrollbar">
+      <!-- 背景のグラデーション -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+      
+      <!-- 上部のノッチ -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+      
+      <div class="p-6 pt-16">
+        <!-- ヘッダー -->
+        <header class="flex items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
+          <button class="mr-4 p-2 text-gray-700 hover:text-gray-900 clickable-button" data-action="navigate" data-url="index.html">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">検索</h1>
+            <p class="text-sm text-gray-600">スポットやイベントを検索</p>
+          </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main>
+          <!-- 検索バー -->
+          <div class="relative mb-6 animate-on-load" style="animation-delay: 200ms;">
+            <input type="text" id="searchInput" placeholder="例: 古町、ランチ、インスタ映え" class="w-full py-4 pl-4 pr-12 bg-white/50 backdrop-blur-md border border-white/30 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400">
+            <button class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+              <i data-lucide="search" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- 人気の検索キーワード -->
+          <div class="mobile-card mb-6 animate-on-load" style="animation-delay: 300ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="trending-up" class="w-5 h-5 mr-2 text-emerald-500"></i>
+              人気のキーワード
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              <button class="search-tag px-3 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium hover:bg-emerald-200 transition-colors">古町</button>
+              <button class="search-tag px-3 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium hover:bg-emerald-200 transition-colors">カフェ</button>
+              <button class="search-tag px-3 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium hover:bg-emerald-200 transition-colors">水族館</button>
+              <button class="search-tag px-3 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium hover:bg-emerald-200 transition-colors">美術館</button>
+              <button class="search-tag px-3 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium hover:bg-emerald-200 transition-colors">花火大会</button>
+              <button class="search-tag px-3 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium hover:bg-emerald-200 transition-colors">ランチ</button>
+            </div>
+          </div>
+
+          <!-- カテゴリー検索 -->
+          <div class="mobile-card mb-6 animate-on-load" style="animation-delay: 400ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="grid-3x3" class="w-5 h-5 mr-2 text-blue-500"></i>
+              カテゴリーから探す
+            </h3>
+            <div class="grid grid-cols-3 gap-3">
+              <button class="category-btn flex flex-col items-center p-4 bg-white/50 backdrop-blur-md rounded-xl hover:bg-white/70 transition-colors">
+                <i data-lucide="map-pin" class="w-8 h-8 text-emerald-500 mb-2"></i>
+                <span class="text-sm font-medium text-gray-700">観光スポット</span>
+              </button>
+              <button class="category-btn flex flex-col items-center p-4 bg-white/50 backdrop-blur-md rounded-xl hover:bg-white/70 transition-colors">
+                <i data-lucide="utensils" class="w-8 h-8 text-red-500 mb-2"></i>
+                <span class="text-sm font-medium text-gray-700">グルメ</span>
+              </button>
+              <button class="category-btn flex flex-col items-center p-4 bg-white/50 backdrop-blur-md rounded-xl hover:bg-white/70 transition-colors">
+                <i data-lucide="calendar" class="w-8 h-8 text-purple-500 mb-2"></i>
+                <span class="text-sm font-medium text-gray-700">イベント</span>
+              </button>
+              <button class="category-btn flex flex-col items-center p-4 bg-white/50 backdrop-blur-md rounded-xl hover:bg-white/70 transition-colors">
+                <i data-lucide="coffee" class="w-8 h-8 text-orange-500 mb-2"></i>
+                <span class="text-sm font-medium text-gray-700">カフェ</span>
+              </button>
+              <button class="category-btn flex flex-col items-center p-4 bg-white/50 backdrop-blur-md rounded-xl hover:bg-white/70 transition-colors">
+                <i data-lucide="palette" class="w-8 h-8 text-pink-500 mb-2"></i>
+                <span class="text-sm font-medium text-gray-700">アート</span>
+              </button>
+              <button class="category-btn flex flex-col items-center p-4 bg-white/50 backdrop-blur-md rounded-xl hover:bg-white/70 transition-colors">
+                <i data-lucide="tree-pine" class="w-8 h-8 text-green-500 mb-2"></i>
+                <span class="text-sm font-medium text-gray-700">自然</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 検索結果エリア -->
+          <div id="searchResults" class="hidden">
+            <h3 class="font-bold text-gray-800 mb-4">検索結果</h3>
+            <div id="resultsContainer" class="space-y-3">
+              <!-- 検索結果がここに表示されます -->
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="../src/utils/utils.js"></script>
+  <script src="../src/components/mobile-ui.js"></script>
+  <script src="../scripts/search.js" defer></script>
+</body>
+</html>

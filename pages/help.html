@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ヘルプ - にいがたび</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../styles/mobile-ui.css">
+</head>
+<body class="bg-white flex items-center justify-center min-h-screen">
+  <!-- スマホ画面のコンテナ -->
+  <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+    <div class="w-full h-full overflow-y-auto no-scrollbar">
+      <!-- 背景のグラデーション -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+      
+      <!-- 上部のノッチ -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+      
+      <div class="p-6 pt-16">
+        <!-- ヘッダー -->
+        <header class="flex items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
+          <button class="mr-4 p-2 text-gray-700 hover:text-gray-900 clickable-button" data-action="navigate" data-url="user-profile.html">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">ヘルプ・サポート</h1>
+            <p class="text-sm text-gray-600">よくある質問とサポート</p>
+          </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main>
+          <!-- 検索バー -->
+          <div class="relative mb-6 animate-on-load" style="animation-delay: 200ms;">
+            <input type="text" placeholder="質問を検索..." class="w-full py-3 pl-4 pr-10 bg-white/50 backdrop-blur-md border border-white/30 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400">
+            <i data-lucide="search" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+          </div>
+
+          <!-- よくある質問 -->
+          <div class="mobile-card mb-6 animate-on-load" style="animation-delay: 300ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="help-circle" class="w-5 h-5 mr-2 text-emerald-500"></i>
+              よくある質問
+            </h3>
+            
+            <div class="space-y-3">
+              <div class="faq-item">
+                <button class="w-full p-4 bg-white/50 backdrop-blur-md rounded-xl text-left hover:bg-white/70 transition-colors">
+                  <div class="flex items-center justify-between">
+                    <span class="font-medium text-gray-700">アカウントを作成するには？</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+                  </div>
+                </button>
+                <div class="faq-answer hidden p-4 bg-white/30 rounded-xl mt-2">
+                  <p class="text-sm text-gray-700">アプリを開いて「新規アカウント作成」ボタンをタップし、必要な情報を入力してください。メールアドレスの認証が必要です。</p>
+                </div>
+              </div>
+              
+              <div class="faq-item">
+                <button class="w-full p-4 bg-white/50 backdrop-blur-md rounded-xl text-left hover:bg-white/70 transition-colors">
+                  <div class="flex items-center justify-between">
+                    <span class="font-medium text-gray-700">パスワードを忘れました</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+                  </div>
+                </button>
+                <div class="faq-answer hidden p-4 bg-white/30 rounded-xl mt-2">
+                  <p class="text-sm text-gray-700">ログイン画面で「パスワードを忘れた場合」をタップし、登録したメールアドレスを入力してください。パスワードリセットのメールが送信されます。</p>
+                </div>
+              </div>
+              
+              <div class="faq-item">
+                <button class="w-full p-4 bg-white/50 backdrop-blur-md rounded-xl text-left hover:bg-white/70 transition-colors">
+                  <div class="flex items-center justify-between">
+                    <span class="font-medium text-gray-700">スポットを予約するには？</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+                  </div>
+                </button>
+                <div class="faq-answer hidden p-4 bg-white/30 rounded-xl mt-2">
+                  <p class="text-sm text-gray-700">トップページの「予約」ボタンから、予約したいスポットを選択し、日時と人数を指定して予約を完了してください。</p>
+                </div>
+              </div>
+              
+              <div class="faq-item">
+                <button class="w-full p-4 bg-white/50 backdrop-blur-md rounded-xl text-left hover:bg-white/70 transition-colors">
+                  <div class="flex items-center justify-between">
+                    <span class="font-medium text-gray-700">通知が届きません</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+                  </div>
+                </button>
+                <div class="faq-answer hidden p-4 bg-white/30 rounded-xl mt-2">
+                  <p class="text-sm text-gray-700">端末の設定で通知が許可されているか確認してください。また、アプリ内の通知設定も確認してください。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- お問い合わせ -->
+          <div class="mobile-card mb-6 animate-on-load" style="animation-delay: 400ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="mail" class="w-5 h-5 mr-2 text-blue-500"></i>
+              お問い合わせ
+            </h3>
+            
+            <div class="space-y-3">
+              <button class="w-full p-4 bg-white/50 backdrop-blur-md rounded-xl flex items-center justify-between hover:bg-white/70 transition-colors">
+                <div class="flex items-center">
+                  <i data-lucide="message-circle" class="w-5 h-5 text-gray-600 mr-3"></i>
+                  <span class="font-medium text-gray-700">メールでお問い合わせ</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
+              </button>
+              
+              <button class="w-full p-4 bg-white/50 backdrop-blur-md rounded-xl flex items-center justify-between hover:bg-white/70 transition-colors">
+                <div class="flex items-center">
+                  <i data-lucide="phone" class="w-5 h-5 text-gray-600 mr-3"></i>
+                  <span class="font-medium text-gray-700">電話でお問い合わせ</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 利用ガイド -->
+          <div class="mobile-card mb-6 animate-on-load" style="animation-delay: 500ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="book-open" class="w-5 h-5 mr-2 text-purple-500"></i>
+              利用ガイド
+            </h3>
+            
+            <div class="space-y-3">
+              <button class="w-full p-4 bg-white/50 backdrop-blur-md rounded-xl flex items-center justify-between hover:bg-white/70 transition-colors">
+                <div class="flex items-center">
+                  <i data-lucide="play-circle" class="w-5 h-5 text-gray-600 mr-3"></i>
+                  <span class="font-medium text-gray-700">アプリの使い方動画</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
+              </button>
+              
+              <button class="w-full p-4 bg-white/50 backdrop-blur-md rounded-xl flex items-center justify-between hover:bg-white/70 transition-colors">
+                <div class="flex items-center">
+                  <i data-lucide="file-text" class="w-5 h-5 text-gray-600 mr-3"></i>
+                  <span class="font-medium text-gray-700">機能説明ガイド</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- サポート情報 -->
+          <div class="mobile-card mb-6 animate-on-load" style="animation-delay: 600ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="info" class="w-5 h-5 mr-2 text-gray-500"></i>
+              サポート情報
+            </h3>
+            
+            <div class="text-sm text-gray-700 space-y-2">
+              <p><strong>営業時間:</strong> 平日 9:00-18:00</p>
+              <p><strong>メール:</strong> support@niigatatabi.com</p>
+              <p><strong>電話:</strong> 025-XXX-XXXX</p>
+              <p><strong>返信目安:</strong> 1営業日以内</p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="../src/utils/utils.js"></script>
+  <script src="../src/components/mobile-ui.js"></script>
+  <script src="../scripts/help.js" defer></script>
+</body>
+</html>

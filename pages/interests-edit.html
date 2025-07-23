@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>興味・関心編集 - にいがたび</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../styles/mobile-ui.css">
+</head>
+<body class="bg-white flex items-center justify-center min-h-screen">
+  <!-- スマホ画面のコンテナ -->
+  <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl overflow-hidden border-8 border-black relative">
+    <div class="w-full h-full overflow-y-auto no-scrollbar">
+      <!-- 背景のグラデーション -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-300 via-cyan-300 to-sky-400 animated-gradient -z-10"></div>
+      
+      <!-- 上部のノッチ -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+      
+      <div class="p-6 pt-16">
+        <!-- ヘッダー -->
+        <header class="flex items-center mb-6 animate-on-load" style="animation-delay: 100ms;">
+          <button class="mr-4 p-2 text-gray-700 hover:text-gray-900 clickable-button" data-action="navigate" data-url="user-profile.html">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">興味・関心編集</h1>
+            <p class="text-sm text-gray-600">あなたの興味に合わせて推奨情報をカスタマイズ</p>
+          </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main>
+          <!-- 選択された興味・関心 -->
+          <div class="mobile-card mb-6 animate-on-load" style="animation-delay: 200ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="heart" class="w-5 h-5 mr-2 text-pink-500"></i>
+              選択中の興味・関心
+            </h3>
+            
+            <div id="selectedInterests" class="flex flex-wrap gap-2 min-h-12">
+              <span class="selected-interest px-3 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium flex items-center">
+                観光
+                <button class="ml-2 w-4 h-4 text-emerald-500 hover:text-emerald-700">
+                  <i data-lucide="x" class="w-3 h-3"></i>
+                </button>
+              </span>
+              <span class="selected-interest px-3 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium flex items-center">
+                アート
+                <button class="ml-2 w-4 h-4 text-emerald-500 hover:text-emerald-700">
+                  <i data-lucide="x" class="w-3 h-3"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+
+          <!-- 興味・関心カテゴリー -->
+          <div class="mobile-card mb-6 animate-on-load" style="animation-delay: 300ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="grid-3x3" class="w-5 h-5 mr-2 text-blue-500"></i>
+              カテゴリーから選択
+            </h3>
+            
+            <div class="grid grid-cols-2 gap-3">
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="グルメ">
+                <div class="text-center">
+                  <i data-lucide="utensils" class="w-8 h-8 text-red-500 mx-auto mb-2"></i>
+                  <span class="block text-sm font-medium text-gray-700">グルメ</span>
+                </div>
+              </button>
+              
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="自然">
+                <div class="text-center">
+                  <i data-lucide="tree-pine" class="w-8 h-8 text-green-500 mx-auto mb-2"></i>
+                  <span class="block text-sm font-medium text-gray-700">自然</span>
+                </div>
+              </button>
+              
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="カフェ">
+                <div class="text-center">
+                  <i data-lucide="coffee" class="w-8 h-8 text-orange-500 mx-auto mb-2"></i>
+                  <span class="block text-sm font-medium text-gray-700">カフェ</span>
+                </div>
+              </button>
+              
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="ショッピング">
+                <div class="text-center">
+                  <i data-lucide="shopping-bag" class="w-8 h-8 text-purple-500 mx-auto mb-2"></i>
+                  <span class="block text-sm font-medium text-gray-700">ショッピング</span>
+                </div>
+              </button>
+              
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="歴史">
+                <div class="text-center">
+                  <i data-lucide="landmark" class="w-8 h-8 text-yellow-600 mx-auto mb-2"></i>
+                  <span class="block text-sm font-medium text-gray-700">歴史</span>
+                </div>
+              </button>
+              
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="温泉">
+                <div class="text-center">
+                  <div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center">
+                    <span class="text-2xl">♨️</span>
+                  </div>
+                  <span class="block text-sm font-medium text-gray-700">温泉</span>
+                </div>
+              </button>
+              
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="スポーツ">
+                <div class="text-center">
+                  <i data-lucide="activity" class="w-8 h-8 text-blue-500 mx-auto mb-2"></i>
+                  <span class="block text-sm font-medium text-gray-700">スポーツ</span>
+                </div>
+              </button>
+              
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="音楽">
+                <div class="text-center">
+                  <i data-lucide="music" class="w-8 h-8 text-indigo-500 mx-auto mb-2"></i>
+                  <span class="block text-sm font-medium text-gray-700">音楽</span>
+                </div>
+              </button>
+              
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="写真撮影">
+                <div class="text-center">
+                  <i data-lucide="camera" class="w-8 h-8 text-teal-500 mx-auto mb-2"></i>
+                  <span class="block text-sm font-medium text-gray-700">写真撮影</span>
+                </div>
+              </button>
+              
+              <button class="interest-option p-4 bg-white/50 backdrop-blur-md rounded-xl border-2 border-transparent hover:border-emerald-300 transition-all" data-interest="夜景">
+                <div class="text-center">
+                  <i data-lucide="moon" class="w-8 h-8 text-gray-600 mx-auto mb-2"></i>
+                  <span class="block text-sm font-medium text-gray-700">夜景</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- カスタム興味・関心追加 -->
+          <div class="mobile-card mb-6 animate-on-load" style="animation-delay: 400ms;">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+              <i data-lucide="plus-circle" class="w-5 h-5 mr-2 text-green-500"></i>
+              カスタム追加
+            </h3>
+            
+            <div class="flex gap-2">
+              <input type="text" id="customInterest" placeholder="その他の興味・関心" class="flex-1 form-input">
+              <button id="addCustom" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 保存ボタン -->
+          <div class="space-y-3 animate-on-load" style="animation-delay: 500ms;">
+            <button id="saveInterests" class="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+              <i data-lucide="save" class="w-5 h-5 mr-2"></i>
+              保存する
+            </button>
+            
+            <button class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-xl transition-colors clickable-button" data-action="navigate" data-url="user-profile.html">
+              キャンセル
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- メッセージ表示用のモーダル -->
+  <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+    <div id="modal-content" class="bg-white/90 backdrop-blur-xl p-8 rounded-2xl shadow-xl text-center max-w-sm w-full">
+      <p id="modal-message" class="mb-6 text-lg font-bold text-gray-800"></p>
+      <button id="close-modal" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full transition-colors">閉じる</button>
+    </div>
+  </div>
+
+  <script src="../src/utils/utils.js"></script>
+  <script src="../src/components/mobile-ui.js"></script>
+  <script src="../scripts/interests-edit.js" defer></script>
+</body>
+</html>

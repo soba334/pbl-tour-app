@@ -66,7 +66,7 @@ function initClickableElements() {
             // data-actionがある場合は特定のアクションを実行
             const action = el.getAttribute('data-action');
             if (action) {
-                handleAction(action, buttonName);
+                handleAction(action, buttonName, el);
             } else {
                 // デフォルトはモーダル表示
                 showModal(`「${buttonName}」がクリックされました`);
@@ -76,10 +76,10 @@ function initClickableElements() {
 }
 
 // アクション処理
-function handleAction(action, buttonName) {
+function handleAction(action, buttonName, element) {
     switch (action) {
         case 'navigate':
-            const url = event.target.closest('.clickable-button').getAttribute('data-url');
+            const url = element?.getAttribute('data-url');
             if (url) {
                 window.location.href = url;
             } else {
@@ -99,7 +99,7 @@ function handleAction(action, buttonName) {
             break;
         
         case 'toggle':
-            toggleElement(event.target.closest('.clickable-button'));
+            toggleElement(element);
             break;
         
         default:
@@ -120,9 +120,12 @@ function toggleElement(element) {
 function initBackButton() {
     const backButton = document.querySelector('.back-button');
     if (backButton) {
-        backButton.addEventListener('click', () => {
-            window.history.back();
-        });
+        // data-actionがある場合はそちらを優先し、ない場合のみhistory.backを使用
+        if (!backButton.hasAttribute('data-action')) {
+            backButton.addEventListener('click', () => {
+                window.history.back();
+            });
+        }
     }
 }
 
