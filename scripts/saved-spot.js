@@ -90,7 +90,8 @@ function renderSpotList(data) {
                     class="text-xs bg-emerald-400/80 text-white px-3 py-1 rounded-full hover:bg-emerald-500 transition-colors">
               詳細
             </button>
-            <button class="text-xs bg-blue-400/80 text-white px-3 py-1 rounded-full hover:bg-blue-500 transition-colors">
+            <button onclick="reserveSpot(${spot.id})" 
+                    class="text-xs bg-blue-400/80 text-white px-3 py-1 rounded-full hover:bg-blue-500 transition-colors">
               予約
             </button>
           </div>
@@ -131,5 +132,20 @@ function toggleFavorite(id) {
     if (currentCategory === "favorite") {
       renderSpotList(spotsData);
     }
+  }
+}
+
+// スポット予約機能
+function reserveSpot(spotId) {
+  const spot = spotsData.find(s => s.id === spotId);
+  if (spot) {
+    // URLパラメータでスポット情報を渡して予約ページに遷移
+    const params = new URLSearchParams({
+      spotId: spot.id,
+      spotName: spot.name,
+      category: spot.category || '',
+      rating: spot.rating || ''
+    });
+    location.href = `spot-reservation.html?${params.toString()}`;
   }
 }
