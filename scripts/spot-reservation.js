@@ -6,7 +6,31 @@ let reservationData = {};
 
 // 初期化
 onDOMReady(() => {
-    showPage('home');
+    // URLパラメータから情報を取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const spotId = urlParams.get('spotId');
+    const spotName = urlParams.get('spotName');
+    const category = urlParams.get('category');
+    const rating = urlParams.get('rating');
+    
+    // URLパラメータからスポット情報が渡された場合
+    if (spotId && spotName) {
+        selectedSpot = {
+            id: spotId,
+            name: spotName,
+            category: category || '',
+            rating: rating || '',
+            description: `${category}として人気のスポット`,
+            fee: '要確認',
+            hours: '要確認'
+        };
+        
+        // 直接詳細ページに移動
+        showPage('detail');
+    } else {
+        showPage('home');
+    }
+    
     initializeEventListeners();
 });
 
